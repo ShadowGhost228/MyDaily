@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.esiea.mydaily.SecondActivity">
+
+    <Button
+        android:id="@+id/button_Home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="51dp"
+        android:layout_marginStart="51dp"
+        android:layout_marginTop="69dp"
+        android:text="Home" />
+
+    <Button
+        android:id="@+id/button_Meal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/button_Home"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="38dp"
+        android:layout_marginRight="38dp"
+        android:text="Meal" />
+
+    <Button
+        android:id="@+id/button_Kiosk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button_Home"
+        android:layout_alignStart="@+id/button_Home"
+        android:layout_centerVertical="true"
+        android:text="Kiosk" />
+
+    <Button
+        android:id="@+id/button_Taxi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button_Meal"
+        android:layout_alignStart="@+id/button_Meal"
+        android:layout_centerVertical="true"
+        android:text="Taxi" />
+
+    <Button
+        android:id="@+id/button_Settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button_Kiosk"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/button_Kiosk"
+        android:layout_marginBottom="69dp"
+        android:text="Settings" />
+
+    <Button
+        android:id="@+id/button_Add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/button_Settings"
+        android:layout_alignLeft="@+id/button_Taxi"
+        android:layout_alignStart="@+id/button_Taxi"
+        android:text="Add" />
+</RelativeLayout>

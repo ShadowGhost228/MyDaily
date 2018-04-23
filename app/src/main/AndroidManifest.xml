@@ -20,7 +20,8 @@
         </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".AccountActivity.SignUpActivity" />
-        <activity android:name=".AccountActivity.ResetPasswordActivity"></activity>
+        <activity android:name=".AccountActivity.ResetPasswordActivity" />
+        <activity android:name=".SecondActivity"></activity>
     </application>
 
 </manifest>

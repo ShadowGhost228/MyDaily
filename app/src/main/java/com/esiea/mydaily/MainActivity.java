@@ -167,8 +167,10 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     private void setDataToView(FirebaseUser user) {
 
-        email.setText("User Email: " + user.getEmail());
-
+        //email.setText("User Email: " + user.getEmail());
+       // setContentView(R.layout.activity_second);
+        Intent intent1= new Intent(MainActivity.this , SecondActivity.class);
+        startActivity(intent1);
 
     }
 
