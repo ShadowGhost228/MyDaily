@@ -10,60 +10,66 @@
         android:id="@+id/button_Home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="137dp"
-        android:layout_marginStart="137dp"
-        android:layout_marginTop="40dp"
+        android:layout_alignBaseline="@+id/button_Add"
+        android:layout_alignBottom="@+id/button_Add"
+        android:layout_alignLeft="@+id/button_Meal"
+        android:layout_alignStart="@+id/button_Meal"
+        android:drawableBottom="@drawable/home_H"
         android:text="Home" />
 
     <Button
         android:id="@+id/button_Meal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button_Home"
-        android:layout_alignBottom="@+id/button_Home"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginEnd="97dp"
-        android:layout_marginRight="97dp"
+        android:layout_alignBaseline="@+id/button_Settings"
+        android:layout_alignBottom="@+id/button_Settings"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:drawableBottom="@drawable/meal_H"
         android:text="Meal" />
 
     <Button
         android:id="@+id/button_Kiosk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button_Home"
-        android:layout_alignStart="@+id/button_Home"
-        android:layout_centerVertical="true"
+        android:layout_alignBottom="@+id/button_Home"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:drawableBottom="@drawable/kiosk_H"
         android:text="Kiosk" />
 
     <Button
         android:id="@+id/button_Taxi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button_Meal"
-        android:layout_alignStart="@+id/button_Meal"
-        android:layout_centerVertical="true"
+        android:layout_alignBaseline="@+id/button_Settings"
+        android:layout_alignBottom="@+id/button_Settings"
+        android:layout_marginEnd="26dp"
+        android:layout_marginRight="26dp"
+        android:layout_toLeftOf="@+id/button_Settings"
+        android:layout_toStartOf="@+id/button_Settings"
+        android:drawableBottom="@drawable/taxi_H"
         android:text="Taxi" />
 
     <Button
         android:id="@+id/button_Settings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button_Kiosk"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/button_Kiosk"
-        android:layout_marginBottom="40dp"
+        android:layout_above="@+id/button_Add"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="12dp"
+        android:layout_marginRight="12dp"
+        android:drawableBottom="@drawable/settings_H"
         android:text="Settings" />
 
     <Button
         android:id="@+id/button_Add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/button_Settings"
         android:layout_alignLeft="@+id/button_Taxi"
+        android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/button_Taxi"
+        android:drawableBottom="@drawable/add_H"
         android:text="Add" />
 </RelativeLayout>

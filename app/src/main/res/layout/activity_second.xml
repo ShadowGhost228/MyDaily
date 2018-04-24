@@ -10,12 +10,12 @@
         android:id="@+id/button_Home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="51dp"
-        android:layout_marginStart="51dp"
-        android:layout_marginTop="67dp"
+        android:layout_above="@+id/button_Kiosk"
+        android:layout_marginEnd="44dp"
+        android:layout_marginRight="44dp"
+        android:layout_toLeftOf="@+id/button_Meal"
+        android:layout_toStartOf="@+id/button_Meal"
+        android:drawableBottom="@drawable/home"
         android:text="Home" />
 
     <Button
@@ -26,8 +26,9 @@
         android:layout_alignBottom="@+id/button_Home"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginEnd="38dp"
-        android:layout_marginRight="38dp"
+        android:layout_marginEnd="21dp"
+        android:layout_marginRight="21dp"
+        android:drawableBottom="@drawable/meal"
         android:text="Meal" />
 
     <Button
@@ -37,6 +38,7 @@
         android:layout_alignLeft="@+id/button_Home"
         android:layout_alignStart="@+id/button_Home"
         android:layout_centerVertical="true"
+        android:drawableBottom="@drawable/kiosk"
         android:text="Kiosk" />
 
     <Button
@@ -45,7 +47,8 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/button_Meal"
         android:layout_alignStart="@+id/button_Meal"
-        android:layout_centerVertical="true"
+        android:layout_below="@+id/button_Meal"
+        android:drawableBottom="@drawable/taxi"
         android:text="Taxi" />
 
     <Button
@@ -53,17 +56,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/button_Kiosk"
-        android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/button_Kiosk"
-        android:layout_marginBottom="69dp"
+        android:layout_below="@+id/button_Kiosk"
+        android:drawableBottom="@drawable/settings"
         android:text="Settings" />
 
     <Button
         android:id="@+id/button_Add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/button_Settings"
-        android:layout_alignLeft="@+id/button_Taxi"
-        android:layout_alignStart="@+id/button_Taxi"
+        android:layout_below="@+id/button_Taxi"
+        android:layout_toEndOf="@+id/imageView3"
+        android:layout_toRightOf="@+id/imageView3"
+        android:drawableBottom="@drawable/add"
         android:text="Add" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button_Meal"
+        android:layout_toLeftOf="@+id/button_Meal"
+        android:layout_toStartOf="@+id/button_Meal"
+        app:srcCompat="@color/colorPrimary" />
+
 </RelativeLayout>
