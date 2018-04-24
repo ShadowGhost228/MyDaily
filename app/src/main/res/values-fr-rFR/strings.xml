@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MyDaily</string>
+    <string name="button_Home">Maison </string>
+    <string name="button_Meal">Manger</string>
+    <string name="button_Kiosk">Kiosque</string>
+    <string name="button_Add">Ajouter</string>
+    <string name="button_Taxi">Taxi</string>
+    <string name="button_Settings">Paramètres</string>
+
+</resources>
