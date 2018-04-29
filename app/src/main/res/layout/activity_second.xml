@@ -8,26 +8,26 @@
 
     <Button
         android:id="@+id/button_Home"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/button_Kiosk"
-        android:layout_marginEnd="44dp"
-        android:layout_marginRight="44dp"
-        android:layout_toLeftOf="@+id/button_Meal"
-        android:layout_toStartOf="@+id/button_Meal"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:drawableBottom="@drawable/home"
         android:text="Home" />
 
     <Button
         android:id="@+id/button_Meal"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button_Home"
-        android:layout_alignBottom="@+id/button_Home"
+
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginEnd="21dp"
-        android:layout_marginRight="21dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="21dp"
         android:drawableBottom="@drawable/meal"
         android:text="Meal" />
 
@@ -39,7 +39,8 @@
         android:layout_alignStart="@+id/button_Home"
         android:layout_centerVertical="true"
         android:drawableBottom="@drawable/kiosk"
-        android:text="Kiosk" />
+        android:text="Kiosk"
+        style="@style/Widget.AppCompat.Button.Borderless"/>
 
     <Button
         android:id="@+id/button_Taxi"
@@ -49,7 +50,8 @@
         android:layout_alignStart="@+id/button_Meal"
         android:layout_below="@+id/button_Meal"
         android:drawableBottom="@drawable/taxi"
-        android:text="Taxi" />
+        android:text="Taxi"
+        style="@style/Widget.AppCompat.Button.Borderless"/>
 
     <Button
         android:id="@+id/button_Settings"
@@ -59,7 +61,8 @@
         android:layout_alignStart="@+id/button_Kiosk"
         android:layout_below="@+id/button_Kiosk"
         android:drawableBottom="@drawable/settings"
-        android:text="Settings" />
+        android:text="Settings"
+        style="@style/Widget.AppCompat.Button.Borderless"/>
 
     <Button
         android:id="@+id/button_Add"
@@ -69,7 +72,8 @@
         android:layout_toEndOf="@+id/imageView3"
         android:layout_toRightOf="@+id/imageView3"
         android:drawableBottom="@drawable/add"
-        android:text="Add" />
+        android:text="Add"
+        style="@style/Widget.AppCompat.Button.Borderless"/>
 
     <ImageView
         android:id="@+id/imageView3"
@@ -78,6 +82,7 @@
         android:layout_below="@+id/button_Meal"
         android:layout_toLeftOf="@+id/button_Meal"
         android:layout_toStartOf="@+id/button_Meal"
-        app:srcCompat="@color/colorPrimary" />
+        app:srcCompat="@color/colorPrimary"
+        />
 
 </RelativeLayout>

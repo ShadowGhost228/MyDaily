@@ -14,8 +14,9 @@
         android:layout_alignBottom="@+id/button_Add"
         android:layout_alignLeft="@+id/button_Meal"
         android:layout_alignStart="@+id/button_Meal"
-        android:drawableBottom="@drawable/home_H"
-        android:text="Home" />
+        android:drawableBottom="@drawable/home_h"
+        android:text="Home"
+        style="@style/Widget.AppCompat.Button.Borderless"/>
 
     <Button
         android:id="@+id/button_Meal"
@@ -25,8 +26,9 @@
         android:layout_alignBottom="@+id/button_Settings"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:drawableBottom="@drawable/meal_H"
-        android:text="Meal" />
+        android:drawableBottom="@drawable/meal_h"
+        android:text="Meal"
+        style="@style/Widget.AppCompat.Button.Borderless"/>
 
     <Button
         android:id="@+id/button_Kiosk"
@@ -35,32 +37,29 @@
         android:layout_alignBottom="@+id/button_Home"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:drawableBottom="@drawable/kiosk_H"
-        android:text="Kiosk" />
+        android:drawableBottom="@drawable/kiosk_h"
+        android:text="Kiosk"
+        style="@style/Widget.AppCompat.Button.Borderless"/>
 
     <Button
         android:id="@+id/button_Taxi"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button_Settings"
-        android:layout_alignBottom="@+id/button_Settings"
-        android:layout_marginEnd="26dp"
-        android:layout_marginRight="26dp"
-        android:layout_toLeftOf="@+id/button_Settings"
-        android:layout_toStartOf="@+id/button_Settings"
-        android:drawableBottom="@drawable/taxi_H"
+        android:layout_above="@+id/button_Add"
+        android:layout_centerHorizontal="true"
+        android:drawableBottom="@drawable/taxi_h"
         android:text="Taxi" />
 
     <Button
         android:id="@+id/button_Settings"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button_Add"
+        android:layout_above="@+id/button_Kiosk"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginEnd="12dp"
-        android:layout_marginRight="12dp"
-        android:drawableBottom="@drawable/settings_H"
+        android:drawableBottom="@drawable/settings_h"
         android:text="Settings" />
 
     <Button
@@ -70,6 +69,7 @@
         android:layout_alignLeft="@+id/button_Taxi"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/button_Taxi"
-        android:drawableBottom="@drawable/add_H"
-        android:text="Add" />
+        android:drawableBottom="@drawable/add_h"
+        android:text="Add"
+        style="@style/Widget.AppCompat.Button.Borderless"/>
 </RelativeLayout>
