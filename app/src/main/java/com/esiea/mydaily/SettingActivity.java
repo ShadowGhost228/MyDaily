@@ -33,8 +33,9 @@ public class SettingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-//get firebase auth instance
+        setContentView(R.layout.activity_setting);
+
+        //get firebase auth instance
         auth = FirebaseAuth.getInstance();
         email = (TextView) findViewById(R.id.useremail);
 
@@ -55,28 +56,20 @@ public class SettingActivity extends AppCompatActivity {
             }
         };
 
-
         btnChangePassword = (Button) findViewById(R.id.change_password_button);
-
         btnRemoveUser = (Button) findViewById(R.id.remove_user_button);
-
         changePassword = (Button) findViewById(R.id.changePass);
-
         remove = (Button) findViewById(R.id.remove);
         signOut = (Button) findViewById(R.id.sign_out);
 
         oldEmail = (EditText) findViewById(R.id.old_email);
-
         password = (EditText) findViewById(R.id.password);
         newPassword = (EditText) findViewById(R.id.newPassword);
 
         oldEmail.setVisibility(View.GONE);
-
         password.setVisibility(View.GONE);
         newPassword.setVisibility(View.GONE);
-
         changePassword.setVisibility(View.GONE);
-
         remove.setVisibility(View.GONE);
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -85,17 +78,13 @@ public class SettingActivity extends AppCompatActivity {
             progressBar.setVisibility(View.GONE);
         }
 
-
         btnChangePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 oldEmail.setVisibility(View.GONE);
-
                 password.setVisibility(View.GONE);
                 newPassword.setVisibility(View.VISIBLE);
-
                 changePassword.setVisibility(View.VISIBLE);
-
                 remove.setVisibility(View.GONE);
             }
         });
@@ -130,7 +119,6 @@ public class SettingActivity extends AppCompatActivity {
                 }
             }
         });
-
 
         btnRemoveUser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -168,10 +156,7 @@ public class SettingActivity extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     private void setDataToView(FirebaseUser user) {
 
-        //email.setText("User Email: " + user.getEmail());
-        // setContentView(R.layout.activity_second);
-        Intent intent1 = new Intent(SettingActivity.this, SecondActivity.class);
-        startActivity(intent1);
+        email.setText("User Email: " + user.getEmail());
 
     }
 
@@ -199,8 +184,7 @@ public class SettingActivity extends AppCompatActivity {
     public void signOut() {
         auth.signOut();
 
-
-// this listener will be called when there is change in firebase user session
+        // this listener will be called when there is change in firebase user session
         FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
