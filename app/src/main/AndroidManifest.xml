@@ -21,7 +21,8 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".AccountActivity.SignUpActivity" />
         <activity android:name=".AccountActivity.ResetPasswordActivity" />
-        <activity android:name=".SecondActivity"></activity>
+        <activity android:name=".SecondActivity" />
+        <activity android:name=".SettingActivity"></activity>
     </application>
 
 </manifest>
