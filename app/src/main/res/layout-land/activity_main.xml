@@ -74,30 +74,31 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="120dp"
-                            android:layout_weight="1"
+                            android:layout_height="290dp"
+                            android:layout_weight="120"
                             android:layout_margin="2dp"
                             android:orientation="vertical"
                             android:background="@color/colorGrapeFruit"
                             >
                             <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
+                                android:layout_width="90dp"
+                                android:layout_height="40dp"
                                 android:layout_marginTop="20dp"
                                 android:layout_gravity="center"
-                                android:src="@drawable/ic_icon_archary"
+                                android:src="@drawable/iconerestaurant"
                                 android:tint="@color/colorWhite"
                                 />
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:padding="8dp"
-                                android:layout_marginTop="30dp"
+                                android:layout_marginTop="20dp"
                                 android:background="@color/colorGrapeFruitDark"
-                                android:text="Archary"
+                                android:text="Restaurant"
                                 android:textSize="18sp"
                                 android:textAlignment="center"
                                 android:textColor="@color/colorWhite"
+                                android:id="@+id/idrestaurant_h"
                                 />
 
                         </LinearLayout>
@@ -110,7 +111,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Check your bank activities"
+                            android:text="Need for a restaurant ?"
                             android:padding="5dp"
                             android:textColor="@android:color/darker_gray"/>
 
@@ -136,23 +137,24 @@
                             android:background="@color/colorFlower"
                             >
                             <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
+                                android:layout_width="80dp"
+                                android:layout_height="40dp"
                                 android:layout_marginTop="20dp"
                                 android:layout_gravity="center"
-                                android:src="@drawable/ic_icon_bowling"
+                                android:src="@drawable/iconetaxi"
                                 android:tint="@color/colorWhite"
                                 />
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:padding="8dp"
-                                android:layout_marginTop="30dp"
+                                android:padding="10dp"
+                                android:layout_marginTop="20dp"
                                 android:background="@color/colorFlowerDark"
-                                android:text="Bowling"
+                                android:text="Taxi"
                                 android:textSize="18sp"
                                 android:textAlignment="center"
                                 android:textColor="@color/colorWhite"
+                                android:id="@+id/idtaxi_h"
                                 />
 
                         </LinearLayout>
@@ -165,7 +167,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Check your bank activities"
+                            android:text="Need for a Taxi ?"
                             android:padding="5dp"
                             android:textColor="@android:color/darker_gray"/>
 
@@ -200,20 +202,20 @@
                             android:orientation="vertical">
 
                             <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
                                 android:layout_gravity="center"
                                 android:layout_marginTop="20dp"
-                                android:src="@drawable/ic_icon_football"
+                                android:src="@drawable/iconkiosk"
                                 android:tint="@color/colorWhite" />
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:layout_marginTop="30dp"
+                                android:layout_marginTop="20dp"
                                 android:background="@color/colorBlueJeansDark"
-                                android:padding="8dp"
-                                android:text="Football"
+                                android:padding="1dp"
+                                android:text="Kiosk"
                                 android:textAlignment="center"
                                 android:textColor="@color/colorWhite"
                                 android:textSize="18sp" />
@@ -228,7 +230,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Check your bank activities"
+                            android:text="Need for a Kiosk"
                             android:padding="5dp"
                             android:textColor="@android:color/darker_gray"/>
 
