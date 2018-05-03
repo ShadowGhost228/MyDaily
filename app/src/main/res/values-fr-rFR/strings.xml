@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Français</string>
+    <string name="app_name">MyDaily</string>
     <string name="btn_rest_tv_one">Restaurant</string>
     <string name="btn_rest_tv_two">Besoin d'un resto?</string>
     <string name="btn_taxi_tv_one">Taxi</string>
