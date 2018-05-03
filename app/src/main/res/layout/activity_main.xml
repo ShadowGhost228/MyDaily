@@ -152,11 +152,11 @@ tools:context="com.esiea.mydaily.SecondActivity">
                             android:padding="0dp"
                             android:layout_marginTop="30dp"
                             android:background="@color/colorFlowerDark"
-                            android:text="Taxi"
+                            android:text="@string/btn_taxi_tv_one"
                             android:textSize="18sp"
                             android:textAlignment="center"
                             android:textColor="@color/colorWhite"
-                            android:id="@+id/idtaxi"
+
                             />
 
                     </LinearLayout>
@@ -169,7 +169,7 @@ tools:context="com.esiea.mydaily.SecondActivity">
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Need for a taxi ?"
+                        android:text="@string/btn_taxi_tv_two"
                         android:padding="5dp"
                         android:textColor="@android:color/darker_gray"/>
 
@@ -217,7 +217,7 @@ tools:context="com.esiea.mydaily.SecondActivity">
                             android:layout_marginTop="30dp"
                             android:background="@color/colorBlueJeansDark"
                             android:padding="3dp"
-                            android:text="Kiosk"
+                            android:text="@string/btn_kiosk_tv_one"
                             android:textAlignment="center"
                             android:textColor="@color/colorWhite"
                             android:textSize="18sp"
@@ -233,7 +233,7 @@ tools:context="com.esiea.mydaily.SecondActivity">
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Need for a kiosk ?"
+                        android:text="@string/btn_taxi_tv_two"
                         android:padding="5dp"
                         android:textColor="@android:color/darker_gray"/>
 
