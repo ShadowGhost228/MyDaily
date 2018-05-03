@@ -94,10 +94,11 @@
                                 android:padding="8dp"
                                 android:layout_marginTop="30dp"
                                 android:background="@color/colorGrapeFruitDark"
-                                android:text="Archary"
+                                android:text="Restaurant"
                                 android:textSize="18sp"
                                 android:textAlignment="center"
                                 android:textColor="@color/colorWhite"
+                                android:id="@+id/idrestaurant"
                                 />
 
                         </LinearLayout>
@@ -110,7 +111,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Check your bank activities"
+                            android:text="Need for a restaurant ?"
                             android:padding="5dp"
                             android:textColor="@android:color/darker_gray"/>
 
@@ -149,10 +150,11 @@
                                 android:padding="8dp"
                                 android:layout_marginTop="30dp"
                                 android:background="@color/colorFlowerDark"
-                                android:text="Bowling"
+                                android:text="Taxi"
                                 android:textSize="18sp"
                                 android:textAlignment="center"
                                 android:textColor="@color/colorWhite"
+                                android:id="@+id/idtaxi"
                                 />
 
                         </LinearLayout>
@@ -165,7 +167,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Check your bank activities"
+                            android:text="Need for a taxi ?"
                             android:padding="5dp"
                             android:textColor="@android:color/darker_gray"/>
 
@@ -213,10 +215,11 @@
                                 android:layout_marginTop="30dp"
                                 android:background="@color/colorBlueJeansDark"
                                 android:padding="8dp"
-                                android:text="Football"
+                                android:text="Kiosk"
                                 android:textAlignment="center"
                                 android:textColor="@color/colorWhite"
-                                android:textSize="18sp" />
+                                android:textSize="18sp"
+                                android:id="@+id/idkiosk"/>
 
                         </LinearLayout>
                         <View
@@ -228,7 +231,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Check your bank activities"
+                            android:text="Need for a kiosk ?"
                             android:padding="5dp"
                             android:textColor="@android:color/darker_gray"/>
 
@@ -313,10 +316,10 @@
                         android:orientation="vertical"
                         android:gravity="center">
                         <ImageView
-                            android:layout_width="64dp"
-                            android:layout_height="64dp"
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
                             android:background="@drawable/cerclebackgroundpurple"
-                            android:src="@drawable/ic_wifi_black_24dp"
+                            android:src="@drawable/iconsetting"
                             android:padding="10dp"/>
                         <TextView
                             android:layout_width="wrap_content"
