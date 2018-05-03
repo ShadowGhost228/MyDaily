@@ -94,7 +94,7 @@
                                 android:padding="8dp"
                                 android:layout_marginTop="20dp"
                                 android:background="@color/colorGrapeFruitDark"
-                                android:text="Restaurant"
+                                android:text="@string/btn_rest_tv_one"
                                 android:textSize="18sp"
                                 android:textAlignment="center"
                                 android:textColor="@color/colorWhite"
@@ -111,7 +111,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Need for a restaurant ?"
+                                android:text="@string/btn_rest_tv_two"
                             android:padding="5dp"
                             android:textColor="@android:color/darker_gray"/>
 
@@ -150,7 +150,7 @@
                                 android:padding="10dp"
                                 android:layout_marginTop="20dp"
                                 android:background="@color/colorFlowerDark"
-                                android:text="Taxi"
+                                android:text="@string/btn_taxi_tv_one"
                                 android:textSize="18sp"
                                 android:textAlignment="center"
                                 android:textColor="@color/colorWhite"
@@ -167,7 +167,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Need for a Taxi ?"
+                            android:text="@string/btn_taxi_tv_two"
                             android:padding="5dp"
                             android:textColor="@android:color/darker_gray"/>
 
@@ -215,7 +215,7 @@
                                 android:layout_marginTop="20dp"
                                 android:background="@color/colorBlueJeansDark"
                                 android:padding="1dp"
-                                android:text="Kiosk"
+                                android:text="@string/btn_kiosk_tv_one"
                                 android:textAlignment="center"
                                 android:textColor="@color/colorWhite"
                                 android:textSize="18sp" />
@@ -230,7 +230,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Need for a Kiosk"
+                            android:text="@string/btn_kiosk_tv_two"
                             android:padding="5dp"
                             android:textColor="@android:color/darker_gray"/>
 
