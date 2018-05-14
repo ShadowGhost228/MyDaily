@@ -257,14 +257,14 @@
                             android:orientation="vertical"
                             android:background="@color/colorAqua"
                             >
+
                             <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:layout_marginTop="20dp"
+                                android:layout_width="75dp"
+                                android:layout_height="59dp"
                                 android:layout_gravity="center"
-                                android:src="@drawable/ic_icon_volleyball"
-                                android:tint="@color/colorWhite"
-                                />
+                                android:layout_marginTop="20dp"
+                                android:src="@drawable/commander"
+                                android:tint="@color/colorWhite" />
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
