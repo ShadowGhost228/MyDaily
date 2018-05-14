@@ -7,5 +7,6 @@
     <string name="btn_taxi_tv_two">Besoin d'un taxi?</string>
     <string name="btn_kiosk_tv_one">Kiosque</string>
     <string name="btn_kiosk_tv_two">Besoin d'un kiosque</string>
-
+    <string name="btn_commander_tv_one">Commander </string>
+    <string name="btn_commander_tv_two">Besoin de commander un plat ? </string>
 </resources>

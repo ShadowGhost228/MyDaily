@@ -271,7 +271,7 @@
                                 android:padding="8dp"
                                 android:layout_marginTop="30dp"
                                 android:background="@color/colorAquaDark"
-                                android:text="Volleyball"
+                                android:text="@string/btn_commander_tv_one"
                                 android:textSize="18sp"
                                 android:textAlignment="center"
                                 android:textColor="@color/colorWhite"
@@ -289,7 +289,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:text="Check your bank activities"
+                            android:text="@string/btn_commander_tv_two"
                             android:textColor="@android:color/darker_gray" />
 
                     </LinearLayout>
