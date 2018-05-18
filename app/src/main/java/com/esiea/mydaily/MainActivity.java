@@ -21,19 +21,55 @@ import com.esiea.mydaily.AccountActivity.*;
 
 public class MainActivity extends AppCompatActivity {
 
-    private CardView settingCardview;
+    private CardView settingCardView, restaurantCardView, taxiCardView, orderCardView, kioskCardView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        settingCardview = (CardView) findViewById(R.id.settingcardview);
+        settingCardView = (CardView) findViewById(R.id.settingcardview);
 
-        settingCardview.setOnClickListener(new View.OnClickListener() {
+        restaurantCardView = (CardView) findViewById(R.id.restaurantcardview);
+
+        taxiCardView = (CardView) findViewById(R.id.taxicardview);
+
+        orderCardView = (CardView) findViewById(R.id.ordercardview);
+
+        kioskCardView = (CardView) findViewById(R.id.kioskcardview);
+
+        settingCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, SettingActivity.class));
+            }
+        });
+
+        restaurantCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, RestaurantActivity.class));
+            }
+        });
+
+        kioskCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, KioskActivity.class));
+            }
+        });
+
+        orderCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, OrderActivity.class));
+            }
+        });
+
+        taxiCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, TaxiActivity.class));
             }
         });
     }

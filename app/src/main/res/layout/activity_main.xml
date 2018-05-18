@@ -59,9 +59,9 @@ tools:context="com.esiea.mydaily.MainActivity">
             android:layout_height="wrap_content">
 
             <android.support.v7.widget.CardView
+                android:id="@+id/restaurantcardview"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:clickable="true"
-                android:id="@+id/bankcardId"
                 android:layout_width="160dp"
                 android:layout_height="190dp"
                 android:layout_margin="10dp">
@@ -122,6 +122,7 @@ tools:context="com.esiea.mydaily.MainActivity">
             <android.support.v7.widget.CardView
                 android:foreground="?android:attr/selectableItemBackground"
                 android:clickable="true"
+                android:id="@+id/taxicardview"
                 android:layout_width="160dp"
                 android:layout_height="190dp"
                 android:layout_margin="10dp">
@@ -186,6 +187,7 @@ tools:context="com.esiea.mydaily.MainActivity">
             android:layout_height="wrap_content">
             <android.support.v7.widget.CardView
                 android:foreground="?android:attr/selectableItemBackground"
+                android:id="@+id/kioskcardview"
                 android:clickable="true"
                 android:layout_width="160dp"
                 android:layout_height="190dp"
@@ -216,7 +218,7 @@ tools:context="com.esiea.mydaily.MainActivity">
                             android:layout_height="match_parent"
                             android:layout_marginTop="30dp"
                             android:background="@color/colorBlueJeansDark"
-                            android:padding="3dp"
+                            android:padding="0dp"
                             android:text="@string/btn_kiosk_tv_one"
                             android:textAlignment="center"
                             android:textColor="@color/colorWhite"
@@ -241,6 +243,7 @@ tools:context="com.esiea.mydaily.MainActivity">
             </android.support.v7.widget.CardView>
             <android.support.v7.widget.CardView
                 android:foreground="?android:attr/selectableItemBackground"
+                android:id="@+id/ordercardview"
                 android:clickable="true"
                 android:layout_width="160dp"
                 android:layout_height="190dp"
@@ -270,14 +273,14 @@ tools:context="com.esiea.mydaily.MainActivity">
 
                         <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="56dp"
+                            android:layout_height="match_parent"
                             android:layout_marginTop="30dp"
                             android:background="@color/colorAquaDark"
-                            android:padding="8dp"
+                            android:padding="0dp"
                             android:text="@string/btn_commander_tv_one"
                             android:textAlignment="center"
                             android:textColor="@color/colorWhite"
-                            android:textSize="14sp" />
+                            android:textSize="18sp" />
 
                     </LinearLayout>
                     <View

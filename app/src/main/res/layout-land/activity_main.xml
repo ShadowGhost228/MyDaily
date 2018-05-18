@@ -61,7 +61,7 @@
                 <android.support.v7.widget.CardView
                     android:foreground="?android:attr/selectableItemBackground"
                     android:clickable="true"
-                    android:id="@+id/bankcardId"
+                    android:id="@+id/restaurantcardview"
                     android:layout_width="160dp"
                     android:layout_height="190dp"
                     android:layout_margin="10dp">
@@ -268,8 +268,8 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:padding="8dp"
-                                android:layout_marginTop="30dp"
+                                android:padding="0dp"
+                                android:layout_marginTop="20dp"
                                 android:background="@color/colorAquaDark"
                                 android:text="@string/btn_commander_tv_one"
                                 android:textSize="18sp"

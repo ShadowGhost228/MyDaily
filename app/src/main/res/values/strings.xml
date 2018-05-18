@@ -40,9 +40,7 @@
     <string name="btn_kiosk_tv_two">Need for a kiosk ?</string>
     <string name="btn_commander_tv_one">Order</string>
     <string name="btn_commander_tv_two">Need to eat something? </string>
-
-
-
+    <string name="latitude">Double latitude</string>
 
 
 </resources>
