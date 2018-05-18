@@ -33,7 +33,11 @@
         <activity android:name=".RestaurantActivity" />
         <activity android:name=".TaxiActivity" />
         <activity android:name=".KioskActivity" />
-        <activity android:name=".OrderActivity"></activity>
+        <activity android:name=".OrderActivity" />
+
+        <service
+            android:name=".GetLocationServices"
+            android:exported="false" />
     </application>
 
 </manifest>
