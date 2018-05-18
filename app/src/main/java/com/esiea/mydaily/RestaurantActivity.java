@@ -27,9 +27,10 @@ public class RestaurantActivity extends AppCompatActivity {
 
     private LocationListener locationListener;
     private LocationManager locationManager;
-    private Location location;
+    private Location location = null;
     private double latitude;
     private double longitude;
+    //private LocateSingleton locateSingleton;
     //private TextView latitudeTextView;
 
     public static final int LOCATION_UPDATE_MIN_DISTANCE = 10;
@@ -41,15 +42,19 @@ public class RestaurantActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant);
 
-        final TextView latitudeTextView = (TextView) findViewById(R.id.textlatitude);
 
+        final TextView latitudeTextView = (TextView) findViewById(R.id.textlatitude);
 
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
+        /*
         locationListener = new LocationListener() {
+
             @Override
             public void onLocationChanged(Location location) {
+
                 latitudeTextView.append("\n " + location.getLongitude() + " " + location.getLatitude());
+
             }
 
             @Override
@@ -69,8 +74,15 @@ public class RestaurantActivity extends AppCompatActivity {
                 startActivity(i);
             }
         };
+        */
 
-        currentPosition();
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            return;
+        }
+        location = locationManager.getLastKnownLocation("gps");
+
+        latitudeTextView.append("\n " + location.getLongitude() + " " + location.getLatitude());
 
     }
 
@@ -80,7 +92,12 @@ public class RestaurantActivity extends AppCompatActivity {
                                            @NonNull int[] grantResults) {
         switch (requestCode) {
             case 10:
-                currentPosition();
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    return;
+                }
+                //locationManager.requestLocationUpdates("gps", 5000, 0, locationListener);
+                locationManager.getLastKnownLocation("gps");
                 break;
             default:
                 break;
@@ -88,6 +105,7 @@ public class RestaurantActivity extends AppCompatActivity {
     }
 
 
+    /*
     void currentPosition() {
         // first check for permissions
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -100,4 +118,5 @@ public class RestaurantActivity extends AppCompatActivity {
         // this code won't execute IF permissions are not allowed, because in the line above there is return statement.
         locationManager.requestLocationUpdates("gps", 5000, 0, locationListener);
     }
+    */
 }
