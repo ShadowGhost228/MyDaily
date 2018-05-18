@@ -69,7 +69,7 @@ public class GetLocationServices extends IntentService {
         URL url = null;
         try{
             Log.i("TAG" , "Je suis dans le try");
-            url= new URL("https://maps.googleapis.com/maps/api/place/textsearch/json?query=123+main+street&location="+ location.getLongitude() +","+location.getLatitude() +"&radius=10000&key=AIzaSyAnYVkPDWerM5AWh6Gw79_mh9xIg54c3Ws");
+            url= new URL("https://maps.googleapis.com/maps/api/place/textsearch/json?query=restaurants&location="+ location.getLongitude() +","+location.getLatitude() +"&radius=10000&key=AIzaSyAnYVkPDWerM5AWh6Gw79_mh9xIg54c3Ws");
             Log.i("TAG" , "J'ai travaillé l'url");
             HttpURLConnection conn=(HttpsURLConnection) url.openConnection();
             Log.i("TAG" , "J'ai travaillez la connection");
