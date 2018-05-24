@@ -42,5 +42,7 @@
     <string name="btn_commander_tv_two">Need to eat something? </string>
     <string name="latitude">Double latitude</string>
 
+    <string name="Notification">Ceci est une notification</string>
+
 
 </resources>

@@ -1,8 +1,13 @@
 package com.esiea.mydaily;
 
 import android.Manifest;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -11,8 +16,11 @@ import android.os.Build;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,6 +57,22 @@ public class RestaurantActivity extends AppCompatActivity {
 
         GetLocationServices.startActionGetAllLocations(this, location);
 
+        IntentFilter intentFilter = new IntentFilter(LOCATION_UPDATE);
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(new LocationUpdate(), intentFilter);
+
+    }
+
+    //Action a la fin du téléchargement
+    public static final String LOCATION_UPDATE = "com.esiea.mydaily.LOCATION_UPDATE";
+    public class LocationUpdate extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            //String action = getIntent().getAction();
+            createNotification();
+            Log.i("TAG", "Téléchargement terminé"); // prévoir une action de notification ici
+
+        }
     }
 
     @Override
@@ -73,5 +97,31 @@ public class RestaurantActivity extends AppCompatActivity {
 
     public void setLocation(Location location) {
         this.location = location;
+    }
+
+    private final void createNotification(){
+        final NotificationManager nNotification=(NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+        final Intent launchNotificationIntent=new Intent(this, RestaurantActivity.class);
+        final PendingIntent pendingIntent=PendingIntent.getActivity(this , 100 ,
+                launchNotificationIntent , PendingIntent.FLAG_ONE_SHOT);
+
+        /*
+        Notification.Builder builder=new Notification.Builder(this)
+                .setWhen(System.currentTimeMillis())
+                .setTicker("ICI LA NOTIFICATION")
+                .setContentTitle("Notice")
+                .setSmallIcon(android.R.drawable.btn_star_big_on)
+                .setContentText(getResources().getString(R.string.Notification))
+                .setContentIntent(pendingIntent);
+        */
+
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
+                .setSmallIcon(android.R.drawable.btn_star_big_on)
+                .setContentTitle("Notice")
+                .setContentText(getResources().getString(R.string.Notification))
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+        nNotification.notify(0 , mBuilder.build());
+
     }
 }

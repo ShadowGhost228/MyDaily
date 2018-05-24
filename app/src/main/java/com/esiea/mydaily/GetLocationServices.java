@@ -1,9 +1,13 @@
 package com.esiea.mydaily;
 
 import android.app.IntentService;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.Context;
 import android.location.Location;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import java.io.File;
@@ -48,6 +52,7 @@ public class GetLocationServices extends IntentService {
         context.startService(intent);
     }
 
+    //LocalBroadcastManager.getInstance(this).sendBroadcast(new Intent(RestaurantActivity.LOCATION_UPDATE));
 
 
     @Override
@@ -80,6 +85,9 @@ public class GetLocationServices extends IntentService {
                 Log.i("TAG" , "Je rentre dans le if");
                 copyInputStreamToFile(conn.getInputStream() , new File(getCacheDir(), "locationData.json"));
                 Log.i("TAG" , "dataLocation.json DOWLOADED");
+
+                LocalBroadcastManager.getInstance(this).sendBroadcast(new Intent(RestaurantActivity.LOCATION_UPDATE));
+
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();
