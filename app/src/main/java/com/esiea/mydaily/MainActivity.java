@@ -27,7 +27,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Notifications notifications=new Notifications();
+        notifications.notificationFunction(this , "toast" , "Connexion réuissie");
         settingCardView = (CardView) findViewById(R.id.settingcardview);
 
         restaurantCardView = (CardView) findViewById(R.id.restaurantcardview);
