@@ -2,7 +2,6 @@ package com.esiea.mydaily.AccountActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -16,33 +15,33 @@ import android.widget.Toast;
 
 import com.esiea.mydaily.Notifications;
 import com.esiea.mydaily.R;
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
-import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.esiea.mydaily.MainActivity;
-import com.google.firebase.auth.GoogleAuthProvider;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
-
+    private static final int DIALOG_ALERT = 10;
     private EditText inputEmail, inputPassword;
     private FirebaseAuth auth;
     private ProgressBar progressBar;
     private Button btnSignup, btnLogin, btnReset, btnGoogle;
     private final static int RC_SIGN_IN = 2;
-
+    boolean authentification=false;
     GoogleApiClient  mGoogleApiClient;
     SharedPreferences sharedPrefManager;
     private FirebaseAuth.AuthStateListener mAuthListener;
-
+    Notifications notifications=new Notifications();
 
 
 
@@ -56,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if (auth.getCurrentUser() != null) {
 
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+           startActivity(new Intent(LoginActivity.this, MainActivity.class));
 
             finish();
         }
@@ -97,6 +96,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (TextUtils.isEmpty(email)) {
                     Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
+
                     return;
                 }
 
@@ -124,16 +124,61 @@ public class LoginActivity extends AppCompatActivity {
                                         Toast.makeText(LoginActivity.this, getString(R.string.auth_failed), Toast.LENGTH_LONG).show();
                                     }
                                 } else {
-                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                    startActivity(intent);
-                                    finish();
+                                   showDialog(DIALOG_ALERT);
+                                   /* Dialog dialog=new Dialog(getApplicationContext());
+                                    dialog=onCreateDialog(10);
+                                    if(dialog.){
+
+                                    }*/
+                                   authentification=true;
+
+
                                 }
                             }
                         });
             }
         });
+
     }
 
+    protected Dialog onCreateDialog(int id) {
+        switch (id) {
+            case DIALOG_ALERT:
+                // Create out AlterDialog
+                Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("this application uses a gelation, do you want to continue?");
+                builder.setCancelable(true);
+                builder.setPositiveButton("I agree", new OkOnClickListener());
+                builder.setNegativeButton("No, no", new CancelOnClickListener());
+                AlertDialog dialog = builder.create();
+                dialog.show();
+        }
+        return super.onCreateDialog(id);
+    }
+    private final class CancelOnClickListener implements
+            DialogInterface.OnClickListener {
+        public void onClick(DialogInterface dialog, int which) {
+           notifications.notificationFunction(getApplicationContext(), "toast" , "GoodBye");
+            try {
+                LoginActivity.this.clone();
+            } catch (CloneNotSupportedException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    private final class OkOnClickListener implements
+            DialogInterface.OnClickListener {
+        public void onClick(DialogInterface dialog, int which) {
+            if(authentification==true) {
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+                LoginActivity.this.finish();
+            }
+
+        }
+    }
 /**
     // This IS the method where the result of clicking the signIn button will be handled
     @Override
