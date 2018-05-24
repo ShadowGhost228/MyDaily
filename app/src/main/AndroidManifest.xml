@@ -38,6 +38,7 @@
         <service
             android:name=".GetLocationServices"
             android:exported="false" />
+
     </application>
 
 </manifest>

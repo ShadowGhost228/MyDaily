@@ -38,8 +38,9 @@
     <string name="btn_taxi_tv_two">Need for a taxi ?</string>
     <string name="btn_kiosk_tv_one">Kiosk</string>
     <string name="btn_kiosk_tv_two">Need for a kiosk ?</string>
-    <string name="btn_commander_tv_one">Order</string>
-    <string name="btn_commander_tv_two">Need to eat something? </string>
+    <string name="btn_commander_tv_one">Address</string>
+    <string name="btn_commander_tv_two">locate an address
+? </string>
     <string name="latitude">Double latitude</string>
 
     <string name="Notification">Ceci est une notification</string>
