@@ -68,11 +68,10 @@ public class RestaurantActivity extends AppCompatActivity {
     public class LocationUpdate extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Notifications notifications=new Notifications();
             //String action = getIntent().getAction();
             createNotification();
-            Log.i("TAG", "Téléchargement terminé"); // prévoir une action de notification ici
-           // notifications.notificationFunction(this , "toast" , "Téléchargement terminé");
+            Log.i("TAG", "Téléchargement terminé"); // prévoir une action de notification ici
+
         }
     }
 
@@ -126,3 +125,4 @@ public class RestaurantActivity extends AppCompatActivity {
 
     }
 }
+
