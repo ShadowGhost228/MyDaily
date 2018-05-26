@@ -60,7 +60,7 @@ public class GetLocationServices extends IntentService {
         if (intent != null) {
             final String action = intent.getAction();
             if (ACTION_GET_ALL_LOCATIONS.equals(action)) {
-                handleActionGetAllLocations(RestaurantActivity.getLocation());
+                  handleActionGetAllLocations(RestaurantActivity.getLocate());
             }
         }
     }

@@ -1,9 +1,6 @@
 package com.esiea.mydaily;
 
 import android.Manifest;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -12,30 +9,28 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Build;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.logging.Logger;
-import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.FusedLocationProviderClient;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 public class RestaurantActivity extends AppCompatActivity {
 
     private LocationListener locationListener;
     private LocationManager locationManager;
-    private static Location location = null;
+    public static Location locate = null;
+
+    private FusedLocationProviderClient mFusedLocationClient;
+
 
 
     @Override
@@ -45,35 +40,100 @@ public class RestaurantActivity extends AppCompatActivity {
 
         final TextView latitudeTextView = (TextView) findViewById(R.id.textlatitude);
 
+        final TextView latitudeDeuxTextView = (TextView) findViewById(R.id.textlatitudedeux);
+
+        final Button buttonNotification = (Button) findViewById(R.id.btn_notify);
+
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            return;
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this,
+                        Manifest.permission.ACCESS_COARSE_LOCATION)
+                        != PackageManager.PERMISSION_GRANTED) {
+
+            // Permission is not granted
+            // Should we show an explanation?
+            //Boite de Dialog
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION) &&
+                    ActivityCompat.shouldShowRequestPermissionRationale(this,
+                            Manifest.permission.ACCESS_COARSE_LOCATION)) {
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+            } else {
+                // No explanation needed; request the permission
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        1);
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                        2);
+
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+            }
+        } else {
+            // Permission has already been granted
+            //location = locationManager.getLastKnownLocation("gps");
+
+            locationListener = new LocationListener() {
+                @Override
+                public void onLocationChanged(Location location) {
+                    if (ActivityCompat.checkSelfPermission(RestaurantActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                            && ActivityCompat.checkSelfPermission(RestaurantActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                        return;
+                    }
+                    if (location != null) {
+                        latitudeTextView.setText("\n Location :" + location.getLatitude() + " \n Location :" + location.getLongitude());
+
+                        //setLocate(locationManager.getLastKnownLocation("gps"));
+
+
+                    }
+
+                }
+
+                @Override
+                public void onStatusChanged(String provider, int status, Bundle extras) {
+
+                }
+
+                @Override
+                public void onProviderEnabled(String provider) {
+
+                }
+
+                @Override
+                public void onProviderDisabled(String provider) {
+                    Intent i = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(i);
+                }
+            };
+
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
+
+            setLocate(locationManager.getLastKnownLocation("gps"));
+            if (locate != null) {
+                latitudeDeuxTextView.setText("\n Locate: " + locate.getLatitude() + " \n Locate: " + locate.getLongitude());
+                GetLocationServices.startActionGetAllLocations(RestaurantActivity.this, locate);
+            }
+
         }
-        location = locationManager.getLastKnownLocation("gps");
 
-        latitudeTextView.append("\n " + location.getLongitude() + " " + location.getLatitude());
 
-        GetLocationServices.startActionGetAllLocations(this, location);
+
 
         IntentFilter intentFilter = new IntentFilter(LOCATION_UPDATE);
-
         LocalBroadcastManager.getInstance(this).registerReceiver(new LocationUpdate(), intentFilter);
 
     }
 
-    //Action a la fin du téléchargement
-    public static final String LOCATION_UPDATE = "com.esiea.mydaily.LOCATION_UPDATE";
-    public class LocationUpdate extends BroadcastReceiver {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            //String action = getIntent().getAction();
-            createNotification();
-            Log.i("TAG", "Téléchargement terminé"); // prévoir une action de notification ici
-
-        }
-    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
@@ -84,45 +144,51 @@ public class RestaurantActivity extends AppCompatActivity {
                     // TODO: Consider calling
                     return;
                 }
-                locationManager.getLastKnownLocation("gps");
                 break;
             default:
                 break;
         }
     }
 
-    public static Location getLocation() {
-        return location;
+    //Action a la fin du téléchargement
+    public static final String LOCATION_UPDATE = "com.esiea.mydaily.LOCATION_UPDATE";
+
+    public class LocationUpdate extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.i("TAG", "Téléchargement terminé");
+        }
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
-    }
+    /*
+    public final void createNotification(){
+        final Notifications notifications=new Notifications();
+        notifications.notificationFunction(this,"toast" , "Je suis dans la notiiii");
+        final NotificationManager mNotification = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
-    private final void createNotification(){
-        final NotificationManager nNotification=(NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-        final Intent launchNotificationIntent=new Intent(this, RestaurantActivity.class);
-        final PendingIntent pendingIntent=PendingIntent.getActivity(this , 100 ,
-                launchNotificationIntent , PendingIntent.FLAG_ONE_SHOT);
+        final Intent launchNotifiactionIntent = new Intent(this, RestaurantActivity.class);
+        final PendingIntent pendingIntent = PendingIntent.getActivity(this,
+                100, launchNotifiactionIntent,
+                PendingIntent.FLAG_ONE_SHOT);
 
-        /*
-        Notification.Builder builder=new Notification.Builder(this)
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
                 .setWhen(System.currentTimeMillis())
                 .setTicker("ICI LA NOTIFICATION")
                 .setContentTitle("Notice")
-                .setSmallIcon(android.R.drawable.btn_star_big_on)
+                .setSmallIcon(android.R.drawable.btn_radio)
                 .setContentText(getResources().getString(R.string.Notification))
                 .setContentIntent(pendingIntent);
-        */
 
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(android.R.drawable.btn_star_big_on)
-                .setContentTitle("Notice")
-                .setContentText(getResources().getString(R.string.Notification))
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        mNotification.notify(0, builder.build());
+    }
+    */
 
-        nNotification.notify(0 , mBuilder.build());
+    public static Location getLocate() {
+        return locate;
+    }
 
+    public static void setLocate(Location locate) {
+        RestaurantActivity.locate = locate;
     }
 }
 

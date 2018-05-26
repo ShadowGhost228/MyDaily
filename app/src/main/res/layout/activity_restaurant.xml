@@ -14,4 +14,20 @@
             android:layout_centerVertical="true"
             android:text="@string/latitude" />
 
+        <TextView
+            android:id="@+id/textlatitudedeux"
+            android:layout_marginTop="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_below="@+id/textlatitude"
+            android:text="@string/latitude" />
+
+        <Button
+            android:id="@+id/btn_notify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="notify"/>
+
 </RelativeLayout>
