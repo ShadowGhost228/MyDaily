@@ -43,6 +43,7 @@
     <string name="Title_notification">test Title</string>
     <string name="message_notification">test notification</string>
     <string name="latitude">Double latitude</string>
+    <string name="messageTaxi">you must have heecth or uber, INSTALL ?</string>
 
     <string name="Notification">Ceci est une notification</string>
 

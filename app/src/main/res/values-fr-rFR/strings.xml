@@ -11,4 +11,5 @@
     <string name="btn_commander_tv_two">Localiser une adresse ? </string>
     <string name="latitude">Double latitude</string>
     <string name="Notification">Ceci est une notification</string>
+    <string name="messageTaxi">Vous devez avoir Heetch ou Uber , voulez vous installer ?</string>
 </resources>

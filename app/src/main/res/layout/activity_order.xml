@@ -4,19 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OrderActivity"
-  >
-    <android.support.v7.widget.LinearLayoutCompat
+    tools:context=".OrderActivity">
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/autocomplete"
-        ></android.support.v7.widget.LinearLayoutCompat>
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="27dp">
+
+        <Button
+            android:id="@+id/btn_choix_maps"
+            android:layout_width="66dp"
+            android:layout_height="86dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="186dp"
+            android:background="@drawable/btn_choix_maps"
+            android:src="@drawable/btn_choix_maps"
+            android:textColor="@color/colorBlueJeans" />
+    </RelativeLayout>
 
     <fragment
         android:id="@+id/place_autocomplete_fragment"
+        android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
 
         />
+
+
+
+
 </android.support.constraint.ConstraintLayout>
+

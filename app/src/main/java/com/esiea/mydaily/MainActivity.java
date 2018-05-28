@@ -1,15 +1,20 @@
 package com.esiea.mydaily;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,7 +31,7 @@ import com.esiea.mydaily.AccountActivity.*;
 public class MainActivity extends AppCompatActivity  {
 
     private CardView settingCardView, restaurantCardView, taxiCardView, orderCardView, kioskCardView;
-
+    private static final int DIALOG_ALERT = 10;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +80,18 @@ public class MainActivity extends AppCompatActivity  {
         taxiCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, TaxiActivity.class));
+                PackageManager pm=getPackageManager();
+
+                try {
+                    Intent intent = pm.getLaunchIntentForPackage("com.ubercab");
+                    startActivity(intent);
+                }
+                catch(Exception e) {
+                    showDialog(DIALOG_ALERT);
+
+                }
+
+                //startActivity(new Intent(MainActivity.this, TaxiActivity.class));
             }
         });
     }
@@ -100,5 +116,43 @@ public class MainActivity extends AppCompatActivity  {
 
         mNotification.notify(0, builder.build());
     }
+
+    protected Dialog onCreateDialog(int id) {
+        switch (id) {
+            case DIALOG_ALERT:
+                // Create out AlterDialog
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage(" "+getString(R.string.messageTaxi));
+                builder.setCancelable(true);
+                builder.setPositiveButton("I agree", new MainActivity.OkOnClickListener());
+                builder.setNegativeButton("No, no", new MainActivity.CancelOnClickListener());
+                AlertDialog dialog = builder.create();
+                dialog.show();
+        }
+        return super.onCreateDialog(id);
+    }
+    private final class CancelOnClickListener implements
+            DialogInterface.OnClickListener {
+        public void onClick(DialogInterface dialog, int which) {
+           // notifications.notificationFunction(getApplicationContext(), "toast" , "GoodBye");
+            try {
+                MainActivity.this.clone();
+            } catch (CloneNotSupportedException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    private final class OkOnClickListener implements
+            DialogInterface.OnClickListener {
+        public void onClick(DialogInterface dialog, int which) {
+            PackageManager pm=getPackageManager();
+            Intent intent = pm.getLaunchIntentForPackage("com.android.vending");
+            startActivity(intent);
+
+        }
+    }
+
 
 }
