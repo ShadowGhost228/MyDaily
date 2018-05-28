@@ -2,11 +2,11 @@
 <resources>
     <string name="app_name">MyDaily</string>
     <string name="btn_rest_tv_one">Restaurant</string>
-    <string name="btn_rest_tv_two">Besoin d'un resto?</string>
+    <string name="btn_rest_tv_two">Besoin d\'un resto?</string>
     <string name="btn_taxi_tv_one">Taxi</string>
-    <string name="btn_taxi_tv_two">Besoin d'un taxi?</string>
+    <string name="btn_taxi_tv_two">Besoin d\'un taxi?</string>
     <string name="btn_kiosk_tv_one">Kiosque</string>
-    <string name="btn_kiosk_tv_two">Besoin d'un kiosque</string>
+    <string name="btn_kiosk_tv_two">Besoin d\'un kiosque</string>
     <string name="btn_commander_tv_one">Adresse </string>
     <string name="btn_commander_tv_two">Localiser une adresse ? </string>
     <string name="latitude">Double latitude</string>
