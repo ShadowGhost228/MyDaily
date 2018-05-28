@@ -1,6 +1,8 @@
 package com.esiea.mydaily;
 
 import android.Manifest;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +14,7 @@ import android.location.LocationManager;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,7 +31,7 @@ public class RestaurantActivity extends AppCompatActivity {
     private LocationListener locationListener;
     private LocationManager locationManager;
     public static Location locate = null;
-
+    Notifications notifications=new Notifications();
     private FusedLocationProviderClient mFusedLocationClient;
 
 
@@ -157,6 +160,8 @@ public class RestaurantActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             Log.i("TAG", "Téléchargement terminé");
+            notifications.notificationFunction(RestaurantActivity.this, "toast" , " "+getString(R.string.message_telechargement));
+            createNotification();
         }
     }
 
@@ -182,6 +187,25 @@ public class RestaurantActivity extends AppCompatActivity {
         mNotification.notify(0, builder.build());
     }
     */
+    private final void createNotification(){
+        final Notifications notifications=new Notifications();
+        final NotificationManager mNotification = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+        final Intent launchNotifiactionIntent = new Intent(this, MainActivity.class);
+        final PendingIntent pendingIntent = PendingIntent.getActivity(this,
+                100, launchNotifiactionIntent,
+                PendingIntent.FLAG_ONE_SHOT);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
+                .setWhen(System.currentTimeMillis())
+                .setTicker(" "+getString(R.string.message_telechargement))
+                .setContentTitle("Json")
+                .setSmallIcon(android.R.drawable.btn_radio)
+                .setContentText(getResources().getString(R.string.message_telechargement))
+                .setContentIntent(pendingIntent);
+
+        mNotification.notify(0, builder.build());
+    }
 
     public static Location getLocate() {
         return locate;

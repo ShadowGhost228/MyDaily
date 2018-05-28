@@ -37,7 +37,6 @@ public class OrderActivity extends AppCompatActivity {
 
                 try {
                     Intent intent = pm.getLaunchIntentForPackage("com.google.android.apps.maps");
-                    
                     startActivity(intent);
                 }
                 catch(Exception e) {
