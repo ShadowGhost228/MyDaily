@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -33,6 +34,7 @@ public class RestaurantActivity extends AppCompatActivity {
     public static Location locate = null;
     Notifications notifications=new Notifications();
     private FusedLocationProviderClient mFusedLocationClient;
+    long [] pattern = {0, 100, 1000, 300, 200, 100, 500, 200, 100};
 
 
 
@@ -177,7 +179,7 @@ public class RestaurantActivity extends AppCompatActivity {
                 PendingIntent.FLAG_ONE_SHOT);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
-                .setWhen(System.currentTimeMillis())
+                .setWhen(System.currentTimeMillis()) 
                 .setTicker("ICI LA NOTIFICATION")
                 .setContentTitle("Notice")
                 .setSmallIcon(android.R.drawable.btn_radio)
@@ -196,13 +198,17 @@ public class RestaurantActivity extends AppCompatActivity {
                 100, launchNotifiactionIntent,
                 PendingIntent.FLAG_ONE_SHOT);
 
+
+
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
                 .setWhen(System.currentTimeMillis())
                 .setTicker(" "+getString(R.string.message_telechargement))
                 .setContentTitle("Json")
                 .setSmallIcon(android.R.drawable.btn_radio)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.logoapp))
                 .setContentText(getResources().getString(R.string.message_telechargement))
-                .setContentIntent(pendingIntent);
+                .setContentIntent(pendingIntent)
+                .setVibrate(pattern);
 
         mNotification.notify(0, builder.build());
     }
