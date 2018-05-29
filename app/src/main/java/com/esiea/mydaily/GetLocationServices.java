@@ -9,11 +9,22 @@ import android.content.Context;
 import android.location.Location;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+import android.widget.RelativeLayout;
 
+import com.esiea.mydaily.JsonTraitment.Restaurant;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -34,6 +45,7 @@ public class GetLocationServices extends IntentService {
     // TODO: Rename actions, choose action names that describe tasks that this
     // IntentService can perform, e.g. ACTION_FETCH_NEW_ITEMS
     private static final String ACTION_GET_ALL_LOCATIONS = "com.esiea.mydaily.action.GET_ALL_LOCATIONS";
+    private static final String ACTION_PARSE_JSON = "com.esiea.mydaily.action.PARSE_JSON";
 
     public GetLocationServices() {
         super("GetLocationServices");
@@ -52,6 +64,19 @@ public class GetLocationServices extends IntentService {
         context.startService(intent);
     }
 
+    /**
+     * Starts this service to perform action Foo with the given parameters. If
+     * the service is already performing a task this action will be queued.
+     *
+     * @see IntentService
+     */
+    public static void startActionParseJson(Context context) {
+        Intent intent = new Intent(context, GetLocationServices.class);
+        intent.setAction(ACTION_PARSE_JSON);
+        context.startService(intent);
+    }
+
+
     //LocalBroadcastManager.getInstance(this).sendBroadcast(new Intent(RestaurantActivity.LOCATION_UPDATE));
 
 
@@ -61,6 +86,9 @@ public class GetLocationServices extends IntentService {
             final String action = intent.getAction();
             if (ACTION_GET_ALL_LOCATIONS.equals(action)) {
                   handleActionGetAllLocations(RestaurantActivity.getLocate());
+            }
+            if (ACTION_PARSE_JSON.equals(action)) {
+                HandleActionParseJsonToRestaurant();
             }
         }
     }
@@ -83,8 +111,8 @@ public class GetLocationServices extends IntentService {
             Log.i("TAG" , "Connection etablie");
             if(HttpsURLConnection.HTTP_OK == conn.getResponseCode()){
                 Log.i("TAG" , "Je rentre dans le if");
-                copyInputStreamToFile(conn.getInputStream() , new File(getCacheDir(), "locationData.json"));
-                Log.i("TAG" , "dataLocation.json DOWLOADED");
+                copyInputStreamToFile(conn.getInputStream() , new File(getFilesDir(), "locationData.json"));
+                Log.i("TAG" , "dataLocation.json DOWLOADING");
 
                 LocalBroadcastManager.getInstance(this).sendBroadcast(new Intent(RestaurantActivity.LOCATION_UPDATE));
 
@@ -95,6 +123,7 @@ public class GetLocationServices extends IntentService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
 
     }
 
@@ -113,5 +142,85 @@ public class GetLocationServices extends IntentService {
         }
     }
 
+    private JSONArray getAllLocationsFromFile(){
+        try {
+            InputStream is = new FileInputStream(getFilesDir()+ "/" + "locationData.json");
+            /*byte[] buffer = new byte[is.available()];
+            is.read(buffer);
+            is.close();
+            if (is == null){
+                Log.i("TAG", "NOT FIND LOCATIONDATA.JSON");
+            }*/
+            //return new JSONArray(new String(buffer, "UTF-8"));
+            JSONArray jsonArray = new JSONArray(convertStreamToString(is));
+            return  jsonArray;
+        }catch (FileNotFoundException e){
+            e.printStackTrace();
+            return new JSONArray();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new JSONArray();
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return new JSONArray();
+        }
+    }
+
+    private void HandleActionParseJsonToRestaurant(){
+
+        try {
+            //Get location
+            JSONArray jsonArray = getAllLocationsFromFile();
+
+            //Parsing
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject data = jsonArray.getJSONObject(i);
+
+                String name = data.getString("name");
+                String formatted_address = data.getString("formatted_address");
+                String icon = data.getString("icon");
+
+                // opening_hours node
+                JSONObject dataNode = data.getJSONObject("opening_hours");
+                String open_now = dataNode.getString("open_now");
+                String weekday_text = dataNode.getString("weekday_text");
+
+
+
+                //
+                Restaurant.Opening_hours opening_hours = new Restaurant.Opening_hours(open_now, weekday_text);
+                Restaurant restaurant = new Restaurant(formatted_address, name, icon, opening_hours );
+                Log.i("TAG", restaurant.toString());
+
+
+            }
+
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+
+
+    }
+
+    private String convertStreamToString(InputStream inputStream) {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+        StringBuilder sb = new StringBuilder();
+
+        String line;
+        try {
+            while ((line = reader.readLine()) != null) {
+                sb.append(line).append('\n');
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                inputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return sb.toString();
+    }
 
 }

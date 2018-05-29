@@ -14,10 +14,4 @@
         android:layout_centerVertical="true"
         android:text="@string/latitude" />
 
-    <Button
-        android:id="@+id/btn_notify"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="notify"/>
-
 </RelativeLayout>

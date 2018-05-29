@@ -24,6 +24,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.esiea.mydaily.JsonTraitment.Restaurant;
 import com.google.android.gms.location.FusedLocationProviderClient;
 
 
@@ -32,10 +33,8 @@ public class RestaurantActivity extends AppCompatActivity {
     private LocationListener locationListener;
     private LocationManager locationManager;
     public static Location locate = null;
-    Notifications notifications=new Notifications();
-    private FusedLocationProviderClient mFusedLocationClient;
-    long [] pattern = {0, 100, 1000, 300, 200, 100, 500, 200, 100};
-
+    Notifications notifications = new Notifications();
+    long[] pattern = {0, 100, 1000, 300, 200, 100, 500, 200, 100};
 
 
     @Override
@@ -46,8 +45,6 @@ public class RestaurantActivity extends AppCompatActivity {
         final TextView latitudeTextView = (TextView) findViewById(R.id.textlatitude);
 
         final TextView latitudeDeuxTextView = (TextView) findViewById(R.id.textlatitudedeux);
-
-        final Button buttonNotification = (Button) findViewById(R.id.btn_notify);
 
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
@@ -124,14 +121,13 @@ public class RestaurantActivity extends AppCompatActivity {
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
 
             setLocate(locationManager.getLastKnownLocation("gps"));
+
             if (locate != null) {
                 latitudeDeuxTextView.setText("\n Locate: " + locate.getLatitude() + " \n Locate: " + locate.getLongitude());
                 GetLocationServices.startActionGetAllLocations(RestaurantActivity.this, locate);
             }
 
         }
-
-
 
 
         IntentFilter intentFilter = new IntentFilter(LOCATION_UPDATE);
@@ -162,35 +158,14 @@ public class RestaurantActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             Log.i("TAG", "Téléchargement terminé");
-            notifications.notificationFunction(RestaurantActivity.this, "toast" , " "+getString(R.string.message_telechargement));
+            notifications.notificationFunction(RestaurantActivity.this, "toast", " " + getString(R.string.message_telechargement));
             createNotification();
+            GetLocationServices.startActionParseJson(RestaurantActivity.this);
         }
     }
 
-    /*
-    public final void createNotification(){
-        final Notifications notifications=new Notifications();
-        notifications.notificationFunction(this,"toast" , "Je suis dans la notiiii");
-        final NotificationManager mNotification = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-
-        final Intent launchNotifiactionIntent = new Intent(this, RestaurantActivity.class);
-        final PendingIntent pendingIntent = PendingIntent.getActivity(this,
-                100, launchNotifiactionIntent,
-                PendingIntent.FLAG_ONE_SHOT);
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
-                .setWhen(System.currentTimeMillis()) 
-                .setTicker("ICI LA NOTIFICATION")
-                .setContentTitle("Notice")
-                .setSmallIcon(android.R.drawable.btn_radio)
-                .setContentText(getResources().getString(R.string.Notification))
-                .setContentIntent(pendingIntent);
-
-        mNotification.notify(0, builder.build());
-    }
-    */
-    private final void createNotification(){
-        final Notifications notifications=new Notifications();
+    private final void createNotification() {
+        final Notifications notifications = new Notifications();
         final NotificationManager mNotification = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
         final Intent launchNotifiactionIntent = new Intent(this, MainActivity.class);
@@ -199,10 +174,9 @@ public class RestaurantActivity extends AppCompatActivity {
                 PendingIntent.FLAG_ONE_SHOT);
 
 
-
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
                 .setWhen(System.currentTimeMillis())
-                .setTicker(" "+getString(R.string.message_telechargement))
+                .setTicker(" " + getString(R.string.message_telechargement))
                 .setContentTitle("Json")
                 .setSmallIcon(android.R.drawable.btn_radio)
                 .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.logoapp))
@@ -220,5 +194,6 @@ public class RestaurantActivity extends AppCompatActivity {
     public static void setLocate(Location locate) {
         RestaurantActivity.locate = locate;
     }
+
 }
 
