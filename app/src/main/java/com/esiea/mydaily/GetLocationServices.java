@@ -10,6 +10,7 @@ import android.location.Location;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.esiea.mydaily.JsonTraitment.Restaurant;
 
@@ -85,7 +86,7 @@ public class GetLocationServices extends IntentService {
         if (intent != null) {
             final String action = intent.getAction();
             if (ACTION_GET_ALL_LOCATIONS.equals(action)) {
-                  handleActionGetAllLocations(RestaurantActivity.getLocate());
+                handleActionGetAllLocations(RestaurantActivity.getLocate());
             }
             if (ACTION_PARSE_JSON.equals(action)) {
                 HandleActionParseJsonToRestaurant();
@@ -100,26 +101,30 @@ public class GetLocationServices extends IntentService {
     private void handleActionGetAllLocations(Location location) {
         Log.i("TAG", "Handle action Location");
         URL url = null;
-        try{
-            Log.i("TAG" , "Je suis dans le try");
-            url= new URL("https://maps.googleapis.com/maps/api/place/textsearch/json?query=restaurants&location="+ location.getLongitude() +","+location.getLatitude() +"&radius=10000&key=AIzaSyAnYVkPDWerM5AWh6Gw79_mh9xIg54c3Ws");
-            Log.i("TAG" , "J'ai travaillé l'url");
-            HttpURLConnection conn=(HttpsURLConnection) url.openConnection();
-            Log.i("TAG" , "J'ai travaillez la connection");
+        try {
+            Log.i("TAG", "Je suis dans le try");
+            url = new URL("https://maps.googleapis.com/maps/api/place/textsearch/json?query=restaurants&location=" + location.getLatitude() + "," + location.getLongitude() + "&radius=10000&key=AIzaSyAnYVkPDWerM5AWh6Gw79_mh9xIg54c3Ws");
+            Log.i("TAG", "J'ai travaillé l'url");
+            HttpURLConnection conn = (HttpsURLConnection) url.openConnection();
+            Log.i("TAG", "J'ai travaillez la connection");
             conn.setRequestMethod("GET");
             conn.connect();
-            Log.i("TAG" , "Connection etablie");
-            if(HttpsURLConnection.HTTP_OK == conn.getResponseCode()){
-                Log.i("TAG" , "Je rentre dans le if");
-                copyInputStreamToFile(conn.getInputStream() , new File(getFilesDir(), "locationData.json"));
-                Log.i("TAG" , "dataLocation.json DOWLOADING");
+            Log.i("TAG", "Connection etablie");
+            if (HttpsURLConnection.HTTP_OK == conn.getResponseCode()) {
+                Log.i("TAG", "Je rentre dans le if");
+                //Log.i("TAG", convertStreamToString(conn.getInputStream()));
+
+                File file = new File(getCacheDir(), "locationData.json");
+
+                copyInputStreamToFile(conn.getInputStream(), file);
+                Log.i("TAG", "dataLocation.json DOWLOADING");
 
                 LocalBroadcastManager.getInstance(this).sendBroadcast(new Intent(RestaurantActivity.LOCATION_UPDATE));
 
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();
-            Log.i("TAG" , "Je suis une execption");
+            Log.i("TAG", "Je suis une execption");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -127,34 +132,33 @@ public class GetLocationServices extends IntentService {
 
     }
 
-    private void copyInputStreamToFile(InputStream inputStream, File file) {
+    private void copyInputStreamToFile(InputStream in, File file) {
         try {
             OutputStream out = new FileOutputStream(file);
             byte[] buf = new byte[1024];
             int len;
-            while((len=in.read(buf))>0){
-                out.write(buf,0,len);
+            while ((len = in.read(buf)) > 0) {
+                out.write(buf, 0, len);
             }
             out.close();
             in.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 
-    private JSONArray getAllLocationsFromFile(){
+    private JSONArray getAllLocationsFromFileArray() {
         try {
-            InputStream is = new FileInputStream(getFilesDir()+ "/" + "locationData.json");
-            /*byte[] buffer = new byte[is.available()];
+            InputStream is = new FileInputStream(getCacheDir() + "/" + "locationData.json");
+
+            byte[] buffer = new byte[is.available()];
             is.read(buffer);
             is.close();
-            if (is == null){
-                Log.i("TAG", "NOT FIND LOCATIONDATA.JSON");
-            }*/
-            //return new JSONArray(new String(buffer, "UTF-8"));
-            JSONArray jsonArray = new JSONArray(convertStreamToString(is));
-            return  jsonArray;
-        }catch (FileNotFoundException e){
+            Log.i("TAG", "JE recupere le fichier");
+            return new JSONArray(new String(buffer, "UTF-8"));
+
+            //return new JSONArray(convertStreamToString(is));
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
             return new JSONArray();
         } catch (IOException e) {
@@ -166,36 +170,83 @@ public class GetLocationServices extends IntentService {
         }
     }
 
-    private void HandleActionParseJsonToRestaurant(){
+    private JSONObject getAllLocationsFromFileObject() {
+        try {
+            InputStream is = new FileInputStream(getCacheDir() + "/" + "locationData.json");
+            /*
+            byte[] buffer = new byte[is.available()];
+            is.read(buffer);
+            is.close();
+            Log.i("TAG", "JE recupere le fichier");
+            return new JSONArray(new String(buffer, "UTF-8"));
+            */
+            return new JSONObject(convertStreamToString(is));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return new JSONObject();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new JSONObject();
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return new JSONObject( );
+        }
+    }
+
+    private void HandleActionParseJsonToRestaurant() {
 
         try {
             //Get location
-            JSONArray jsonArray = getAllLocationsFromFile();
+            //JSONArray jsonArray = getAllLocationsFromFileArray();
+            JSONObject jsonObject = getAllLocationsFromFileObject();
+
+            JSONArray results = jsonObject.getJSONArray("results");
+
+            Log.i("TAG", results.toString());
 
             //Parsing
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject data = jsonArray.getJSONObject(i);
+            for (int i = 0; i < results.length(); i++) {
+                JSONObject data = results.getJSONObject(i);
 
                 String name = data.getString("name");
                 String formatted_address = data.getString("formatted_address");
                 String icon = data.getString("icon");
 
                 // opening_hours node
-                JSONObject dataNode = data.getJSONObject("opening_hours");
-                String open_now = dataNode.getString("open_now");
-                String weekday_text = dataNode.getString("weekday_text");
+                //JSONObject dataNode = data.getJSONObject("opening_hours");
+                //String open_now = dataNode.getString("open_now");
+                //String weekday_text = dataNode.getString("weekday_text");
 
 
+                Restaurant.Opening_hours opening_hours;
 
-                //
-                Restaurant.Opening_hours opening_hours = new Restaurant.Opening_hours(open_now, weekday_text);
-                Restaurant restaurant = new Restaurant(formatted_address, name, icon, opening_hours );
-                Log.i("TAG", restaurant.toString());
+                JSONObject openingNode = data.getJSONObject("opening_hours");
+
+                String open_now = " ";
+
+                open_now = openingNode.getString("open_now");
+
+                opening_hours = new Restaurant.Opening_hours(open_now);
+
+                /*
+                if(openingNode.isNull("opening_hours")){
+                    opening_hours = new Restaurant.Opening_hours(open_now);
+
+                } else {
+                    open_now = openingNode.getString("open_now");
+                    opening_hours = new Restaurant.Opening_hours(open_now);
+                }
+                */
+
+
+                Restaurant restaurant = new Restaurant(formatted_address, name, icon, opening_hours);
+                Log.i("TAG", "\n"+restaurant.toString()+"\n");
 
 
             }
 
-        }catch (JSONException e){
+
+        } catch (JSONException e) {
             e.printStackTrace();
         }
 
@@ -205,7 +256,6 @@ public class GetLocationServices extends IntentService {
     private String convertStreamToString(InputStream inputStream) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         StringBuilder sb = new StringBuilder();
-
         String line;
         try {
             while ((line = reader.readLine()) != null) {

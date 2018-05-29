@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 createNotification();
-               // startActivity(new Intent(MainActivity.this, KioskActivity.class));
+                startActivity(new Intent(MainActivity.this, KioskActivity.class));
             }
         });
 

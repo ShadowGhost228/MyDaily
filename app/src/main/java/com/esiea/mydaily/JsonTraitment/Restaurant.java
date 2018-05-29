@@ -86,18 +86,17 @@ public class Restaurant {
                 "formatted_address='" + formatted_address + '\'' +
                 ", name='" + name + '\'' +
                 ", icon='" + icon + '\'' +
-                ", opening_hours=" + opening_hours +
+                ", opening_hours=" + opening_hours.toString() +
                 '}';
     }
 
     //Class
     public static class Opening_hours {
-        private String open_now;
-        private String weekday_text;
 
-        public Opening_hours(String open_now, String weekday_text) {
+        private String open_now;
+
+        public Opening_hours(String open_now) {
             this.open_now = open_now;
-            this.weekday_text = weekday_text;
         }
 
         public String getOpen_now() {
@@ -108,12 +107,11 @@ public class Restaurant {
             this.open_now = open_now;
         }
 
-        public String getWeekday_text() {
-            return weekday_text;
-        }
-
-        public void setWeekday_text(String weekday_text) {
-            this.weekday_text = weekday_text;
+        @Override
+        public String toString() {
+            return "Opening_hours{" +
+                    "open_now='" + open_now + '\'' +
+                    '}';
         }
     }
 }

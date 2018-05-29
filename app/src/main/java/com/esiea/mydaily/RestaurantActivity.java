@@ -161,6 +161,8 @@ public class RestaurantActivity extends AppCompatActivity {
             notifications.notificationFunction(RestaurantActivity.this, "toast", " " + getString(R.string.message_telechargement));
             createNotification();
             GetLocationServices.startActionParseJson(RestaurantActivity.this);
+            notifications.notificationFunction(RestaurantActivity.this, "toast", " Parse json fait");
+
         }
     }
 
