@@ -30,6 +30,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -114,7 +115,7 @@ public class GetLocationServices extends IntentService {
                 Log.i("TAG", "Je rentre dans le if");
                 //Log.i("TAG", convertStreamToString(conn.getInputStream()));
 
-                File file = new File(getCacheDir(), "locationData.json");
+                File file = new File(getCacheDir(), "locationRestaurantData.json");
 
                 copyInputStreamToFile(conn.getInputStream(), file);
                 Log.i("TAG", "dataLocation.json DOWLOADING");
@@ -147,29 +148,6 @@ public class GetLocationServices extends IntentService {
         }
     }
 
-    private JSONArray getAllLocationsFromFileArray() {
-        try {
-            InputStream is = new FileInputStream(getCacheDir() + "/" + "locationData.json");
-
-            byte[] buffer = new byte[is.available()];
-            is.read(buffer);
-            is.close();
-            Log.i("TAG", "JE recupere le fichier");
-            return new JSONArray(new String(buffer, "UTF-8"));
-
-            //return new JSONArray(convertStreamToString(is));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return new JSONArray();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return new JSONArray();
-        } catch (JSONException e) {
-            e.printStackTrace();
-            return new JSONArray();
-        }
-    }
-
     private JSONObject getAllLocationsFromFileObject() {
         try {
             InputStream is = new FileInputStream(getCacheDir() + "/" + "locationData.json");
@@ -193,7 +171,7 @@ public class GetLocationServices extends IntentService {
         }
     }
 
-    private void HandleActionParseJsonToRestaurant() {
+    private void  HandleActionParseJsonToRestaurant() {
 
         try {
             //Get location
@@ -204,6 +182,8 @@ public class GetLocationServices extends IntentService {
 
             Log.i("TAG", results.toString());
 
+            ArrayList<Restaurant> restaurantArrayList = new ArrayList<Restaurant>();
+
             //Parsing
             for (int i = 0; i < results.length(); i++) {
                 JSONObject data = results.getJSONObject(i);
@@ -212,37 +192,15 @@ public class GetLocationServices extends IntentService {
                 String formatted_address = data.getString("formatted_address");
                 String icon = data.getString("icon");
 
-                // opening_hours node
-                //JSONObject dataNode = data.getJSONObject("opening_hours");
-                //String open_now = dataNode.getString("open_now");
-                //String weekday_text = dataNode.getString("weekday_text");
-
-
                 Restaurant.Opening_hours opening_hours;
-
                 JSONObject openingNode = data.getJSONObject("opening_hours");
-
                 String open_now = " ";
-
                 open_now = openingNode.getString("open_now");
-
                 opening_hours = new Restaurant.Opening_hours(open_now);
-
-                /*
-                if(openingNode.isNull("opening_hours")){
-                    opening_hours = new Restaurant.Opening_hours(open_now);
-
-                } else {
-                    open_now = openingNode.getString("open_now");
-                    opening_hours = new Restaurant.Opening_hours(open_now);
-                }
-                */
-
 
                 Restaurant restaurant = new Restaurant(formatted_address, name, icon, opening_hours);
                 Log.i("TAG", "\n"+restaurant.toString()+"\n");
-
-
+                restaurantArrayList.add(restaurant);
             }
 
 
