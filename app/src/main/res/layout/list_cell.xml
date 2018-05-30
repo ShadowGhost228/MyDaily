@@ -13,7 +13,15 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="15dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        tools:text="Personnage" ></TextView>
+        tools:text="Name" />
+
+    <TextView
+        android:id="@+id/open"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/colorFlower"
+        android:text="  "/>
 
     <TextView
         android:id="@+id/description"
@@ -23,5 +31,6 @@
         android:lines="1"
         android:ellipsize="end"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        tools:text="Description" ></TextView>
+        tools:text="Description" />
+
 </LinearLayout>

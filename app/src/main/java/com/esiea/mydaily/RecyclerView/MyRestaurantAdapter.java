@@ -11,7 +11,7 @@ import com.esiea.mydaily.GetLocationServices;
 import com.esiea.mydaily.JsonTraitment.Restaurant;
 import com.esiea.mydaily.R;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
+public class MyRestaurantAdapter extends RecyclerView.Adapter<MyRestaurantAdapter.MyViewHolder>{
 
 
     @Override
@@ -36,6 +36,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
 
         private final TextView name;
         private final TextView address;
+        private TextView open;
 
         private Restaurant currentRestaurant;
 
@@ -44,6 +45,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
 
             name = ((TextView) itemView.findViewById(R.id.name));
             address = ((TextView) itemView.findViewById(R.id.description));
+            open = ((TextView) itemView.findViewById(R.id.open));
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -59,6 +61,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
         public void display(Restaurant restaurant) {
             currentRestaurant = restaurant;
             name.setText(restaurant.getName());
+            if(restaurant.getOpening_hours().getOpen_now() == "true"){
+                open.setText("  Ouvert  ");
+            } else {
+                open.setText("  Fermé  ");
+            }
+
             address.setText(restaurant.getFormatted_address());
         }
     }

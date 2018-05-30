@@ -7,7 +7,7 @@
     tools:context=".RestaurantActivity">
 
     <TextView
-        android:id="@+id/textlatitude"
+        android:id="@+id/textlocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"

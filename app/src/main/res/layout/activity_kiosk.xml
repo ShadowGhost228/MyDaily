@@ -7,21 +7,19 @@
     tools:context=".KioskActivity">
 
     <TextView
-        android:id="@+id/textlatitudekiosk"
+        android:id="@+id/textlocationkiosk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/latitude" />
+        android:layout_centerVertical="true" />
 
-    <TextView
-        android:id="@+id/textlatitudedeuxkiosk"
-        android:layout_marginTop="50dp"
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_below="@+id/textlatitudekiosk"
-        android:text="@string/latitude" />
+        android:layout_below="@+id/textlocationkiosk"
+        android:text="Voir liste"
+        android:id="@+id/buttonlistkiosk"/>
 
 </RelativeLayout>

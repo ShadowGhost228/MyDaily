@@ -20,7 +20,13 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+
+import com.esiea.mydaily.JsonTraitment.Kiosk;
+import com.esiea.mydaily.RecyclerView.ViewListKioskActivity;
+import com.esiea.mydaily.RecyclerView.ViewListRestaurantActicity;
 
 public class KioskActivity extends AppCompatActivity {
 
@@ -28,6 +34,7 @@ public class KioskActivity extends AppCompatActivity {
     private LocationManager locationManagerKiosk;
     public static Location locateKiosk = null;
     Notifications notifications = new Notifications();
+    Button buttonVoir;
     long[] pattern = {0, 100, 1000, 300, 200, 100, 500, 200, 100};
 
     @Override
@@ -35,9 +42,10 @@ public class KioskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kiosk);
 
-        final TextView latitudeTextView = (TextView) findViewById(R.id.textlatitudekiosk);
+        buttonVoir = (Button) findViewById(R.id.buttonlistkiosk);
+        buttonVoir.setEnabled(false);
 
-        final TextView latitudeDeuxTextView = (TextView) findViewById(R.id.textlatitudedeuxkiosk);
+        final TextView latitudeTextView = (TextView) findViewById(R.id.textlocationkiosk);
 
         locationManagerKiosk = (LocationManager) getSystemService(LOCATION_SERVICE);
 
@@ -84,11 +92,8 @@ public class KioskActivity extends AppCompatActivity {
                         return;
                     }
                     if (location != null) {
-                        latitudeTextView.setText("\n Location :" + location.getLatitude() + " \n Location :" + location.getLongitude());
-
-                        //setLocate(locationManager.getLastKnownLocation("gps"));
+                        //latitudeTextView.setText("\n Location :" + location.getLatitude() + " \n Location :" + location.getLongitude());
                     }
-
                 }
 
                 @Override
@@ -114,7 +119,7 @@ public class KioskActivity extends AppCompatActivity {
             setLocateKiosk(locationManagerKiosk.getLastKnownLocation("gps"));
 
             if (locateKiosk != null) {
-                latitudeDeuxTextView.setText("\n Locate: " + locateKiosk.getLatitude() + " \n Locate: " + locateKiosk.getLongitude());
+                latitudeTextView.setText("\n Locate: " + locateKiosk.getLatitude() + " \n Locate: " + locateKiosk.getLongitude());
                 GetLocationServices.startActionGetAllLocationsKiosk(KioskActivity.this, locateKiosk);
             }
 
@@ -152,6 +157,16 @@ public class KioskActivity extends AppCompatActivity {
             createNotification();
             GetLocationServices.startActionParseJsonKiosk(KioskActivity.this);
             notifications.notificationFunction(KioskActivity.this, "toast", " Parse json fait");
+
+            buttonVoir.setEnabled(true);
+            buttonVoir.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    startActivity(new Intent(KioskActivity.this, ViewListKioskActivity.class));
+
+                }
+            });
 
         }
     }

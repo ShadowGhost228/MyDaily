@@ -1,6 +1,7 @@
 package com.esiea.mydaily;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -22,9 +23,15 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
+import com.esiea.mydaily.JsonTraitment.Restaurant;
 import com.esiea.mydaily.RecyclerView.MyRestaurantAdapter;
+import com.esiea.mydaily.RecyclerView.ViewListRestaurantActicity;
 
 
 public class RestaurantActivity extends AppCompatActivity {
@@ -33,7 +40,10 @@ public class RestaurantActivity extends AppCompatActivity {
     private LocationManager locationManager;
     public static Location locate = null;
     Notifications notifications = new Notifications();
+    Button buttonVoir;
     long[] pattern = {0, 100, 1000, 300, 200, 100, 500, 200, 100};
+    //Action a la fin du téléchargement
+    public static final String LOCATION_UPDATE = "com.esiea.mydaily.LOCATION_UPDATE";
 
 
     @Override
@@ -41,9 +51,13 @@ public class RestaurantActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant);
 
+        buttonVoir = (Button) findViewById(R.id.buttonlist);
+        buttonVoir.setEnabled(false);
+
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
         TextView locationTextView = (TextView) findViewById(R.id.textlocation);
+
 
         if (ActivityCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
@@ -122,16 +136,12 @@ public class RestaurantActivity extends AppCompatActivity {
             if (locate != null) {
                 locationTextView.setText("\n Locate: " + locate.getLatitude() + " \n Locate: " + locate.getLongitude());
                 GetLocationServices.startActionGetAllLocations(RestaurantActivity.this, locate);
+                IntentFilter intentFilter = new IntentFilter(LOCATION_UPDATE);
+                LocalBroadcastManager.getInstance(this).registerReceiver(new LocationUpdate(), intentFilter);
             }
 
         }
-
-
-        IntentFilter intentFilter = new IntentFilter(LOCATION_UPDATE);
-        LocalBroadcastManager.getInstance(this).registerReceiver(new LocationUpdate(), intentFilter);
-
     }
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
@@ -148,9 +158,6 @@ public class RestaurantActivity extends AppCompatActivity {
         }
     }
 
-    //Action a la fin du téléchargement
-    public static final String LOCATION_UPDATE = "com.esiea.mydaily.LOCATION_UPDATE";
-
     public class LocationUpdate extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -160,13 +167,15 @@ public class RestaurantActivity extends AppCompatActivity {
             GetLocationServices.startActionParseJson(RestaurantActivity.this);
             notifications.notificationFunction(RestaurantActivity.this, "toast", " Parse json fait");
 
+            buttonVoir.setEnabled(true);
+            buttonVoir.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-            //Traitement recycler view
-            final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.listRestaurant);
-            recyclerView.setLayoutManager(new LinearLayoutManager(RestaurantActivity.this));
-            recyclerView.setAdapter(new MyRestaurantAdapter());
+                    startActivity(new Intent(RestaurantActivity.this, ViewListRestaurantActicity.class));
 
-
+                }
+            });
         }
     }
 
