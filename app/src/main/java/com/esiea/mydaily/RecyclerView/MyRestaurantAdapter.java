@@ -2,7 +2,6 @@ package com.esiea.mydaily.RecyclerView;
 
 import android.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +11,7 @@ import com.esiea.mydaily.GetLocationServices;
 import com.esiea.mydaily.JsonTraitment.Restaurant;
 import com.esiea.mydaily.R;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
-public class MyRestaurantAdapter extends RecyclerView.Adapter<MyRestaurantAdapter.MyViewHolder>{
+public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
 
 
     @Override
@@ -26,7 +22,7 @@ public class MyRestaurantAdapter extends RecyclerView.Adapter<MyRestaurantAdapte
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.list_cell, parent, false);
+        View view = inflater.inflate(R.layout.list_cell, parent, false );
         return new MyViewHolder(view);
     }
 
