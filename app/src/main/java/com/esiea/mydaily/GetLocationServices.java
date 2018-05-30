@@ -51,7 +51,8 @@ public class GetLocationServices extends IntentService {
     private static final String ACTION_PARSE_JSON = "com.esiea.mydaily.action.PARSE_JSON";
     private static final String ACTION_GET_ALL_LOCATIONS_KIOSK = "com.esiea.mydaily.action.GET_ALL_LOCATIONS_KIOSK";
     private static final String ACTION_PARSE_JSON_KIOSK = "com.esiea.mydaily.action.PARSE_JSON_KIOSK";
-
+    public static ArrayList<Kiosk> kioskArrayList = new ArrayList<Kiosk>();
+    public static ArrayList<Restaurant> restaurantArrayList = new ArrayList<Restaurant>();
 
     public GetLocationServices() {
         super("GetLocationServices");
@@ -283,7 +284,7 @@ public class GetLocationServices extends IntentService {
 
             Log.i("TAG", results.toString());
 
-            ArrayList<Restaurant> restaurantArrayList = new ArrayList<Restaurant>();
+
 
             //Parsing
             for (int i = 0; i < results.length(); i++) {
@@ -331,7 +332,7 @@ public class GetLocationServices extends IntentService {
 
             Log.i("TAG", results.toString());
 
-            ArrayList<Kiosk> kioskArrayList = new ArrayList<Kiosk>();
+            //ArrayList<Kiosk> kioskArrayList = new ArrayList<Kiosk>();
 
             //Parsing
             for (int i = 0; i < results.length(); i++) {
@@ -342,7 +343,7 @@ public class GetLocationServices extends IntentService {
                 String icon = data.getString("icon");
 
                 Kiosk.Opening_hours opening_hours;
-                JSONObject openingNode = data.getJSONObject("opening_hours");
+                 JSONObject openingNode = data.getJSONObject("opening_hours");
                 String open_now = " ";
                 if(openingNode.isNull("open_now")){
                     //openingNode.getString("open_now").isEmpty()
@@ -390,4 +391,19 @@ public class GetLocationServices extends IntentService {
         return sb.toString();
     }
 
+    public static ArrayList<Kiosk> getKioskArrayList() {
+        return kioskArrayList;
+    }
+
+    public static void setKioskArrayList(ArrayList<Kiosk> kioskArrayList) {
+        GetLocationServices.kioskArrayList = kioskArrayList;
+    }
+
+    public static ArrayList<Restaurant> getRestaurantArrayList() {
+        return restaurantArrayList;
+    }
+
+    public static void setRestaurantArrayList(ArrayList<Restaurant> restaurantArrayList) {
+        GetLocationServices.restaurantArrayList = restaurantArrayList;
+    }
 }

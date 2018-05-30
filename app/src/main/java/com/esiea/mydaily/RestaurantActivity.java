@@ -19,13 +19,12 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
-import com.esiea.mydaily.JsonTraitment.Restaurant;
-import com.google.android.gms.location.FusedLocationProviderClient;
+import com.esiea.mydaily.RecyclerView.MyRestaurantAdapter;
 
 
 public class RestaurantActivity extends AppCompatActivity {
@@ -42,11 +41,9 @@ public class RestaurantActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant);
 
-        final TextView latitudeTextView = (TextView) findViewById(R.id.textlatitude);
-
-        final TextView latitudeDeuxTextView = (TextView) findViewById(R.id.textlatitudedeux);
-
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+        TextView locationTextView = (TextView) findViewById(R.id.textlocation);
 
         if (ActivityCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
@@ -91,7 +88,7 @@ public class RestaurantActivity extends AppCompatActivity {
                         return;
                     }
                     if (location != null) {
-                        latitudeTextView.setText("\n Location :" + location.getLatitude() + " \n Location :" + location.getLongitude());
+                        //latitudeTextView.setText("\n Location :" + location.getLatitude() + " \n Location :" + location.getLongitude());
 
                         //setLocate(locationManager.getLastKnownLocation("gps"));
 
@@ -123,7 +120,7 @@ public class RestaurantActivity extends AppCompatActivity {
             setLocate(locationManager.getLastKnownLocation("gps"));
 
             if (locate != null) {
-                latitudeDeuxTextView.setText("\n Locate: " + locate.getLatitude() + " \n Locate: " + locate.getLongitude());
+                locationTextView.setText("\n Locate: " + locate.getLatitude() + " \n Locate: " + locate.getLongitude());
                 GetLocationServices.startActionGetAllLocations(RestaurantActivity.this, locate);
             }
 
@@ -162,6 +159,13 @@ public class RestaurantActivity extends AppCompatActivity {
             createNotification();
             GetLocationServices.startActionParseJson(RestaurantActivity.this);
             notifications.notificationFunction(RestaurantActivity.this, "toast", " Parse json fait");
+
+
+            //Traitement recycler view
+            final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.listRestaurant);
+            recyclerView.setLayoutManager(new LinearLayoutManager(RestaurantActivity.this));
+            recyclerView.setAdapter(new MyRestaurantAdapter());
+
 
         }
     }
