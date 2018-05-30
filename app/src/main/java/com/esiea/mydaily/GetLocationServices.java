@@ -115,10 +115,12 @@ public class GetLocationServices extends IntentService {
         if (intent != null) {
             final String action = intent.getAction();
             if (ACTION_GET_ALL_LOCATIONS.equals(action)) {
-                handleActionGetAllLocations(RestaurantActivity.getLocate());
+                //handleActionGetAllLocations(RestaurantActivity.getLocate());
+                handleActionGetAllLocationsType(RestaurantActivity.getLocate(),"restaurants","locationRestaurantData.json", 0);
             }
             if (ACTION_GET_ALL_LOCATIONS_KIOSK.equals(action)) {
-                handleActionGetAllLocationsKiosk(KioskActivity.getLocateKiosk());
+                //handleActionGetAllLocationsKiosk(KioskActivity.getLocateKiosk());
+                handleActionGetAllLocationsType(KioskActivity.getLocateKiosk(), "gasstation ", "locationKioskData.json",1);
             }
             if (ACTION_PARSE_JSON.equals(action)) {
                 HandleActionParseJsonToRestaurant();
@@ -167,12 +169,12 @@ public class GetLocationServices extends IntentService {
 
     }
 
-    private void handleActionGetAllLocationsKiosk(Location location) {
+    private void handleActionGetAllLocationsType(Location location, String type, String filename, int activity) {
         Log.i("TAG", "Handle action Location");
         URL url = null;
         try {
             Log.i("TAG", "Je suis dans le try");
-            url = new URL("https://maps.googleapis.com/maps/api/place/textsearch/json?query=gas_station&location=" + location.getLatitude() + "," + location.getLongitude() + "&radius=20000&key=AIzaSyAnYVkPDWerM5AWh6Gw79_mh9xIg54c3Ws");
+            url = new URL("https://maps.googleapis.com/maps/api/place/textsearch/json?query="+ type +"&location=" + location.getLatitude() + "," + location.getLongitude() + "&radius=10000&key=AIzaSyAnYVkPDWerM5AWh6Gw79_mh9xIg54c3Ws");
             Log.i("TAG", "J'ai travaillé l'url");
             HttpURLConnection conn = (HttpsURLConnection) url.openConnection();
             Log.i("TAG", "J'ai travaillez la connection");
@@ -182,6 +184,46 @@ public class GetLocationServices extends IntentService {
             if (HttpsURLConnection.HTTP_OK == conn.getResponseCode()) {
                 Log.i("TAG", "Je rentre dans le if");
                 //Log.i("TAG", convertStreamToString(conn.getInputStream()));
+
+                File file = new File(getCacheDir(), filename);
+
+                copyInputStreamToFile(conn.getInputStream(), file);
+                Log.i("TAG", filename +"DOWLOADING");
+
+                if ( activity == 0){
+                    LocalBroadcastManager.getInstance(this).sendBroadcast(new Intent(RestaurantActivity.LOCATION_UPDATE));
+                }else {
+                    LocalBroadcastManager.getInstance(this).sendBroadcast(new Intent(KioskActivity.LOCATION_UPDATE_KIOSK));
+                }
+
+
+            }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+            Log.i("TAG", "Je suis une execption");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    private void handleActionGetAllLocationsKiosk(Location location) {
+        Log.i("TAG", "Handle action Location");
+        URL url = null;
+        try {
+            Log.i("TAG", "Je suis dans le try");
+            url = new URL("https://maps.googleapis.com/maps/api/place/textsearch/json?query=restaurants&location=" + location.getLatitude() + "," + location.getLongitude() + "&radius=10000&key=AIzaSyAnYVkPDWerM5AWh6Gw79_mh9xIg54c3Ws");
+            Log.i("TAG", "J'ai travaillé l'url");
+            HttpURLConnection conn = (HttpsURLConnection) url.openConnection();
+            Log.i("TAG", "J'ai travaillez la connection");
+            conn.setRequestMethod("GET");
+            conn.connect();
+            Log.i("TAG", "Connection etablie");
+            if (HttpsURLConnection.HTTP_OK == conn.getResponseCode()) {
+                Log.i("TAG", "Je rentre dans le if");
+
+                Log.i("TAG", convertStreamToString(conn.getInputStream()));
 
                 File file = new File(getCacheDir(), "locationKioskData.json");
 
@@ -254,13 +296,22 @@ public class GetLocationServices extends IntentService {
                 Restaurant.Opening_hours opening_hours;
                 JSONObject openingNode = data.getJSONObject("opening_hours");
                 String open_now = " ";
-                open_now = openingNode.getString("open_now");
-                opening_hours = new Restaurant.Opening_hours(open_now);
+                if(openingNode.isNull("open_now")){
+                    //openingNode.getString("open_now").isEmpty()
+                    opening_hours = new Restaurant.Opening_hours(open_now);
+                } else {
+                    open_now = openingNode.getString("open_now");
+                    opening_hours = new Restaurant.Opening_hours(open_now);
+                }
 
                 Restaurant restaurant = new Restaurant(formatted_address, name, icon, opening_hours);
                 Log.i("TAG", "\n"+restaurant.toString()+"\n");
+
                 restaurantArrayList.add(restaurant);
+
             }
+
+            Log.i("TAG", restaurantArrayList.toString());
 
 
         } catch (JSONException e) {
@@ -293,13 +344,23 @@ public class GetLocationServices extends IntentService {
                 Kiosk.Opening_hours opening_hours;
                 JSONObject openingNode = data.getJSONObject("opening_hours");
                 String open_now = " ";
-                open_now = openingNode.getString("open_now");
-                opening_hours = new Kiosk.Opening_hours(open_now);
+                if(openingNode.isNull("open_now")){
+                    //openingNode.getString("open_now").isEmpty()
+                    opening_hours = new Kiosk.Opening_hours(open_now);
+                } else {
+                    open_now = openingNode.getString("open_now");
+                    opening_hours = new Kiosk.Opening_hours(open_now);
+                }
 
                 Kiosk kiosk = new Kiosk(formatted_address, name, icon, opening_hours);
                 Log.i("TAG", "\n"+kiosk.toString()+"\n");
+
                 kioskArrayList.add(kiosk);
+
             }
+
+            Log.i("TAG", "Liste des kiosk");
+            Log.i("TAG", kioskArrayList.toString());
 
 
         } catch (JSONException e) {
