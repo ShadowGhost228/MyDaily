@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:background="#fcfcfc"
     tools:context="com.esiea.mydaily.MainActivity">
 
@@ -59,9 +59,9 @@
                 android:layout_height="wrap_content">
 
                 <android.support.v7.widget.CardView
+                    android:id="@+id/restaurantcardview"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:clickable="true"
-                    android:id="@+id/restaurantcardview"
                     android:layout_width="160dp"
                     android:layout_height="190dp"
                     android:layout_margin="10dp">
@@ -74,15 +74,15 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="290dp"
-                            android:layout_weight="120"
+                            android:layout_height="120dp"
+                            android:layout_weight="1"
                             android:layout_margin="2dp"
                             android:orientation="vertical"
                             android:background="@color/colorGrapeFruit"
                             >
                             <ImageView
-                                android:layout_width="90dp"
-                                android:layout_height="40dp"
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
                                 android:layout_marginTop="20dp"
                                 android:layout_gravity="center"
                                 android:src="@drawable/iconerestaurant"
@@ -92,13 +92,13 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:padding="8dp"
-                                android:layout_marginTop="20dp"
+                                android:layout_marginTop="30dp"
                                 android:background="@color/colorGrapeFruitDark"
                                 android:text="@string/btn_rest_tv_one"
                                 android:textSize="18sp"
                                 android:textAlignment="center"
                                 android:textColor="@color/colorWhite"
-                                android:id="@+id/idrestaurant_h"
+
                                 />
 
                         </LinearLayout>
@@ -111,15 +111,18 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                                android:text="@string/btn_rest_tv_two"
-                            android:padding="5dp"
-                            android:textColor="@android:color/darker_gray"/>
+                            android:text="@string/btn_rest_tv_two"
+                            android:padding="0dp"
+                            android:textColor="@android:color/darker_gray"
+
+                            />
 
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
                 <android.support.v7.widget.CardView
                     android:foreground="?android:attr/selectableItemBackground"
                     android:clickable="true"
+                    android:id="@+id/taxicardview"
                     android:layout_width="160dp"
                     android:layout_height="190dp"
                     android:layout_margin="10dp">
@@ -138,7 +141,7 @@
                             >
                             <ImageView
                                 android:layout_width="80dp"
-                                android:layout_height="40dp"
+                                android:layout_height="60dp"
                                 android:layout_marginTop="20dp"
                                 android:layout_gravity="center"
                                 android:src="@drawable/iconetaxi"
@@ -147,14 +150,14 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:padding="10dp"
-                                android:layout_marginTop="20dp"
+                                android:padding="0dp"
+                                android:layout_marginTop="30dp"
                                 android:background="@color/colorFlowerDark"
                                 android:text="@string/btn_taxi_tv_one"
                                 android:textSize="18sp"
                                 android:textAlignment="center"
                                 android:textColor="@color/colorWhite"
-                                android:id="@+id/idtaxi_h"
+
                                 />
 
                         </LinearLayout>
@@ -168,7 +171,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text="@string/btn_taxi_tv_two"
-                            android:padding="5dp"
+                            android:padding="0dp"
                             android:textColor="@android:color/darker_gray"/>
 
                     </LinearLayout>
@@ -184,6 +187,7 @@
                 android:layout_height="wrap_content">
                 <android.support.v7.widget.CardView
                     android:foreground="?android:attr/selectableItemBackground"
+                    android:id="@+id/kioskcardview"
                     android:clickable="true"
                     android:layout_width="160dp"
                     android:layout_height="190dp"
@@ -202,8 +206,8 @@
                             android:orientation="vertical">
 
                             <ImageView
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
                                 android:layout_gravity="center"
                                 android:layout_marginTop="20dp"
                                 android:src="@drawable/iconkiosk"
@@ -212,13 +216,14 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:layout_marginTop="20dp"
+                                android:layout_marginTop="30dp"
                                 android:background="@color/colorBlueJeansDark"
-                                android:padding="1dp"
+                                android:padding="0dp"
                                 android:text="@string/btn_kiosk_tv_one"
                                 android:textAlignment="center"
                                 android:textColor="@color/colorWhite"
-                                android:textSize="18sp" />
+                                android:textSize="18sp"
+                                android:id="@+id/idkiosk"/>
 
                         </LinearLayout>
                         <View
@@ -230,7 +235,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="@string/btn_kiosk_tv_two"
+                            android:text="@string/btn_taxi_tv_two"
                             android:padding="5dp"
                             android:textColor="@android:color/darker_gray"/>
 
@@ -238,6 +243,7 @@
                 </android.support.v7.widget.CardView>
                 <android.support.v7.widget.CardView
                     android:foreground="?android:attr/selectableItemBackground"
+                    android:id="@+id/ordercardview"
                     android:clickable="true"
                     android:layout_width="160dp"
                     android:layout_height="190dp"
@@ -251,31 +257,30 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="120dp"
-                            android:layout_weight="1"
+                            android:layout_height="100dp"
                             android:layout_margin="2dp"
-                            android:orientation="vertical"
+                            android:layout_weight="1"
                             android:background="@color/colorAqua"
-                            >
+                            android:orientation="vertical">
 
                             <ImageView
-                                android:layout_width="75dp"
-                                android:layout_height="59dp"
+                                android:layout_width="98dp"
+                                android:layout_height="63dp"
                                 android:layout_gravity="center"
                                 android:layout_marginTop="20dp"
                                 android:src="@drawable/commander"
                                 android:tint="@color/colorWhite" />
+
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:padding="0dp"
-                                android:layout_marginTop="20dp"
+                                android:layout_marginTop="30dp"
                                 android:background="@color/colorAquaDark"
+                                android:padding="0dp"
                                 android:text="@string/btn_commander_tv_one"
-                                android:textSize="18sp"
                                 android:textAlignment="center"
                                 android:textColor="@color/colorWhite"
-                                />
+                                android:textSize="18sp" />
 
                         </LinearLayout>
                         <View
@@ -296,13 +301,13 @@
                 </android.support.v7.widget.CardView>
 
             </LinearLayout>
-
             <LinearLayout
                 android:clipToPadding="false"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <android.support.v7.widget.CardView
                     android:id="@+id/settingcardview"
                     android:foreground="?android:attr/selectableItemBackground"
@@ -311,15 +316,16 @@
                     android:layout_height="150dp"
                     android:layout_margin="10dp">
                     <LinearLayout
+
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
                         android:gravity="center">
                         <ImageView
-                            android:layout_width="64dp"
-                            android:layout_height="64dp"
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
                             android:background="@drawable/cerclebackgroundpurple"
-                            android:src="@drawable/ic_wifi_black_24dp"
+                            android:src="@drawable/iconsetting"
                             android:padding="10dp"/>
                         <TextView
                             android:layout_width="wrap_content"
