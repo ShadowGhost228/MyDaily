@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.esiea.mydaily.SettingActivity">
+    tools:context="com.esiea.mydaily.SettingActivity"
+    android:background="@drawable/setting_img">
 
     <EditText
         android:id="@+id/old_email"
@@ -88,40 +88,40 @@
     <Button
         android:id="@+id/change_password_button"
         style="?android:textAppearanceSmall"
-        android:layout_width="300dp"
+        android:layout_width="113dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
         android:text="@string/change_password"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="42dp"
-        tools:layout_editor_absoluteY="312dp"
-        android:layout_above="@+id/remove_user_button"
-        android:layout_alignStart="@+id/remove_user_button" />
+        tools:layout_editor_absoluteY="312dp" />
 
     <Button
         android:id="@+id/remove_user_button"
         style="?android:textAppearanceSmall"
-        android:layout_width="300dp"
+        android:layout_width="109dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:text="@string/remove_user"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="42dp"
-        tools:layout_editor_absoluteY="408dp"
-        android:layout_above="@+id/sign_out"
-        android:layout_alignStart="@+id/sign_out" />
+        tools:layout_editor_absoluteY="408dp" />
 
     <Button
         android:id="@+id/sign_out"
         style="?android:textAppearanceSmall"
-        android:layout_width="300dp"
+        android:layout_width="106dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
         android:background="@color/colorPrimary"
         android:text="@string/btn_sign_out"
         android:textColor="@android:color/white"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="42dp"
-        tools:layout_editor_absoluteY="456dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        tools:layout_editor_absoluteY="456dp" />
 
     <TextView
         android:id="@+id/useremail"

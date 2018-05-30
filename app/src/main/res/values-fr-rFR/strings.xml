@@ -13,5 +13,6 @@
     <string name="Notification">Ceci est une notification</string>
     <string name="messageTaxi">Vous devez avoir Heetch ou Uber , voulez vous installer ?</string>
     <string name="message_telechargement">Téléchargement terminé</string>
+    <string name="item_signup">Se Deconnecter</string>
 
 </resources>

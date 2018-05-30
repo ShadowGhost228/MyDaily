@@ -46,6 +46,7 @@
     <string name="messageTaxi">you must have heecth or uber, INSTALL ?</string>
     <string name="message_telechargement">Download finish</string>
     <string name="Notification">Ceci est une notification</string>
+    <string name="item_signup">Sign up</string>
 
 
 </resources>
