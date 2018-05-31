@@ -7,7 +7,7 @@
     tools:context=".RecyclerView.ViewListRestaurantActicity">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/listKiosk"
+        android:id="@+id/listRestaurant"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"

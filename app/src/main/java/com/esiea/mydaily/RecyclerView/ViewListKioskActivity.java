@@ -15,8 +15,8 @@ public class ViewListKioskActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_list_kiosk);
 
         //Traitement recycler view
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.listRestaurant);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.listKiosk);
         recyclerView.setLayoutManager(new LinearLayoutManager(ViewListKioskActivity.this));
-        recyclerView.setAdapter(new MyRestaurantAdapter());
+        recyclerView.setAdapter(new MyKioskAdapter());
     }
 }

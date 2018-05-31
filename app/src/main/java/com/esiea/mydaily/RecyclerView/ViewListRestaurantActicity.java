@@ -6,14 +6,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.esiea.mydaily.R;
-import com.esiea.mydaily.RestaurantActivity;
 
 public class ViewListRestaurantActicity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_list_restaurant_acticity);
+        setContentView(R.layout.activity_view_list_restaurant);
 
         //Traitement recycler view
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.listRestaurant);
